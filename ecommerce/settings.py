@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django_filters',
     'store',
     'cart',
-    'orders'
+    'orders',
+    'home'
 ]
 
 LOGIN_URL = 'login'
@@ -145,7 +146,7 @@ USE_TZ = False
 
 MEDIA_URL = '/media/'
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
