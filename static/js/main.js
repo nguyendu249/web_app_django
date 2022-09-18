@@ -1,484 +1,555 @@
+/***************************************************
+==================== JS INDEX ======================
+****************************************************
+01. PreLoader Js
+
+
+****************************************************/
+
 (function ($) {
-  'use strict';
+	"use strict";
 
-  /*
-  |--------------------------------------------------------------------------
-  | Template Name: Enfhess
-  | Author: ThemeMarch
-  | Version: 1.0.0
-  |--------------------------------------------------------------------------
-  |--------------------------------------------------------------------------
-  | TABLE OF CONTENTS:
-  |--------------------------------------------------------------------------
-  |
-  | 1. Preloader
-  | 2. Mobile Menu
-  | 3. Sticky Header
-  | 4. Dynamic Background
-  | 5. Modal
-  | 6. Image Upload
-  | 7. General Toggle
-  | 8. Slick Slider
-  | 9. Isotop Initialize
-  | 10. Modal Video
-  | 11. Tabs
-  | 12. Accordian
-  | 13. CountDown
-  | 14. Mode Switcher
-  |
-  */
-
-  /*--------------------------------------------------------------
-    Scripts initialization
-  --------------------------------------------------------------*/
-  $.exists = function (selector) {
-    return $(selector).length > 0;
-  };
-
-  $(window).on('load', function () {
-    $(window).trigger('scroll');
-    $(window).trigger('resize');
-    preloader();
-    isotopInit();
-  });
-
-  $(function () {
-    $(window).trigger('resize');
-    mainNav();
-    stickyHeader();
-    dynamicBackground();
-    modal();
-    imageUpload();
-    generalToggle();
-    slickInit();
-    isotopInit();
-    modalVideo();
-    tabs();
-    accordian();
-    countDown();
-    modeSwitcher();
-  });
-
-  $(window).on('resize', function () {
-    isotopInit();
-  });
-
-  $(window).on('scroll', function () {
-    stickyHeader();
-  });
-
-  /*--------------------------------------------------------------
-    1. Preloader
-  --------------------------------------------------------------*/
-  function preloader() {
-    $('.cs-preloader').delay(150).fadeOut('slow');
-  }
-
-  /*--------------------------------------------------------------
-    2. Mobile Menu
-  --------------------------------------------------------------*/
-  function mainNav() {
-    $('.cs-nav').append('<span class="cs-munu_toggle"><span></span></span>');
-    $('.menu-item-has-children').append(
-      '<span class="cs-munu_dropdown_toggle"></span>'
-    );
-    $('.cs-munu_toggle').on('click', function () {
-      $(this)
-        .toggleClass('cs-toggle_active')
-        .siblings('.cs-nav_list')
-        .slideToggle();
-    });
-    $('.cs-munu_dropdown_toggle').on('click', function () {
-      $(this).toggleClass('active').siblings('ul').slideToggle();
-      $(this).parent().toggleClass('active');
-    });
-    // Mega Menu
-    $('.cs-mega-wrapper>li>a').removeAttr('href');
-    // Special Nav
-    $('.cs-hamburger').on('click', function () {
-      $(this).toggleClass('active');
-      $('.cs-nav_wrap').toggleClass('active');
-      $('body').toggleClass('hamburger_active');
-    });
-    $('.cs-nav_cross').on('click', function () {
-      $('.cs-nav_wrap').removeClass('active');
-      $('body').toggleClass('hamburger_active');
-    });
-    // Search Toggle
-    $('.cs-search_toggle').on('click', function () {
-      $(this).toggleClass('active');
-      $('.cs-search_wrap').toggleClass('active');
-    });
-    $('.cs-search_close, .cs-nav_overlay').on('click', function () {
-      $('.cs-search_toggle').removeClass('active');
-      $('.cs-search_wrap').removeClass('active');
-    });
-    // Sub category Toggle
-    $('.cs-subcategory_toggle').on('click', function () {
-      $(this).toggleClass('active').siblings('ul').slideToggle();
-    });
-
-    // Smoth Animated Scroll
-    $(".cs-smoth_scroll").on("click", function () {
-      var thisAttr = $(this).attr("href");
-      if ($(thisAttr).length) {
-        var scrollPoint = $(thisAttr).offset().top - 120;
-        $("body,html").animate(
-          {
-            scrollTop: scrollPoint,
-          },
-          600
-        );
-      }
-      return false;
-    });
-  }
-
-  /*--------------------------------------------------------------
-    3. Sticky Header
-  --------------------------------------------------------------*/
-  function stickyHeader() {
-    var scroll = $(window).scrollTop();
-    if (scroll >= 10) {
-      $('.cs-sticky-header').addClass('cs-sticky-active');
-    } else {
-      $('.cs-sticky-header').removeClass('cs-sticky-active');
-    }
-  }
-
-  /*--------------------------------------------------------------
-    4. Dynamic Background
-  --------------------------------------------------------------*/
-  function dynamicBackground() {
-    $('[data-src]').each(function () {
-      var src = $(this).attr('data-src');
-      $(this).css({
-        'background-image': 'url(' + src + ')',
-      });
-    });
-  }
-
-  /*--------------------------------------------------------------
-    5. Modal
-  --------------------------------------------------------------*/
-  function modal() {
-    $('[data-modal]').on('click', function(){
-      var modalId = $(this).attr('data-modal');
-      $(modalId).toggleClass('active')
-    })
-    $('.cs-modal_close').on('click', function() {
-      $(this).parents('.cs-modal_wrap').removeClass('active')
-    })
-    $('.cs-modal_overlay').on('click', function() {
-      $(this).parents('.cs-modal_wrap').removeClass('active')
-    })
-  }
-
-  /*--------------------------------------------------------------
-    6. Image Upload
-  --------------------------------------------------------------*/
-  function imageUpload() {
-    $('.cs-file').change(function(e) { 
-      $(this).parents('.cs-file_wrap').addClass('active')  
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        document.querySelector(".cs-preview").src = e.target.result;
-      };
-      reader.readAsDataURL(this.files[0]);
-    });
-    $('.cs-close_file').on('click', function() {
-      $(this).parents('.cs-file_wrap').removeClass('active');
-      $('.cs-file').val(null);
-      $('.cs-preview').attr('src', '')
-    })
-  }
-
-  /*--------------------------------------------------------------
-    7. General Toggle
-  --------------------------------------------------------------*/
-  function generalToggle() {
-    // Filter Toggle
-    $('.cs-filter_toggle_btn').on('click', function() {
-      $(this).toggleClass('active').siblings('.cs-filter_toggle_body').slideToggle();
-    })
-    // Color Filter active 
-    $('.cs-color_item ').on('click', function() {
-      $(this).addClass('active').siblings().removeClass('active')
-    })
-    // Global Toggle 
-    $('.cs-toggle_btn').on('click', function () {
-      $(this).parents('.cs-toggle_box').siblings().find('.cs-toggle_btn').removeClass('active').siblings('.cs-toggle_body').removeClass('active')
-      $(this)
-        .toggleClass('active')
-        .siblings('.cs-toggle_body')
-        .toggleClass('active');
-    });
-    $('.cs-mobile_search_toggle').on('click', function() {
-      $('.cs-search_wrap').toggleClass('active')
-    })
-  }
+	var windowOn = $(window);
+	////////////////////////////////////////////////////
+	// 01. PreLoader Js
+	windowOn.on('load', function () {
+		$("#loading").fadeOut(500);
+	});
 
 
-  /*--------------------------------------------------------------
-    8. Slick Slider
-  --------------------------------------------------------------*/
-  function slickInit() {
-    if ($.exists('.cs-slider')) {
-      $('.cs-slider').each(function () {
-        // Slick Variable
-        var $ts = $(this).find('.cs-slider_container');
-        var $slickActive = $(this).find('.cs-slider_wrapper');
-        var $sliderNumber = $(this).siblings('.slider-number');
+	////////////////////////////////////////////////////
+	// 02. Mobile Menu Js
+	$('#mobile-menu').meanmenu({
+		meanMenuContainer: '.mobile-menu',
+		meanScreenWidth: "1199",
+		meanExpand: ['<i class="fal fa-plus"></i>'],
+	});
 
-        // Auto Play
-        var autoPlayVar = parseInt($ts.attr('data-autoplay'), 10);
-        // Auto Play Time Out
-        var autoplaySpdVar = 3000;
-        if (autoPlayVar > 1) {
-          autoplaySpdVar = autoPlayVar;
-          autoPlayVar = 1;
-        }
-        // Slide Change Speed
-        var speedVar = parseInt($ts.attr('data-speed'), 10);
-        // Slider Loop
-        var loopVar = Boolean(parseInt($ts.attr('data-loop'), 10));
-        // Slider Center
-        var centerVar = Boolean(parseInt($ts.attr('data-center'), 10));
-        // Slider Center
-        var variableWidthVar = Boolean(
-          parseInt($ts.attr('data-variable-width'), 10)
-        );
-        // Pagination
-        var paginaiton = $(this).children().hasClass('cs-pagination');
-        // Slide Per View
-        var slidesPerView = $ts.attr('data-slides-per-view');
-        if (slidesPerView == 1) {
-          slidesPerView = 1;
-        }
-        if (slidesPerView == 'responsive') {
-          var slidesPerView = parseInt($ts.attr('data-add-slides'), 10);
-          var lgPoint = parseInt($ts.attr('data-lg-slides'), 10);
-          var mdPoint = parseInt($ts.attr('data-md-slides'), 10);
-          var smPoint = parseInt($ts.attr('data-sm-slides'), 10);
-          var xsPoing = parseInt($ts.attr('data-xs-slides'), 10);
-        }
-        // Fade Slider
-        var fadeVar = parseInt($($ts).attr('data-fade-slide'));
-        fadeVar === 1 ? (fadeVar = true) : (fadeVar = false);
+	////////////////////////////////////////////////////
+	// 03. Sidebar Js
+	$(".tp-menu-toggle").on("click", function () {
+		$(".tp-sidebar-menu").addClass("sidebar-opened");
+		$(".body-overlay").addClass("opened");
+	});
+	$(".sidebar-close").on("click", function () {
+		$(".tp-sidebar-menu").removeClass("sidebar-opened");
+		$(".body-overlay").removeClass("opened");
+	});
+	$(".body-overlay").on("click", function () {
+		$(".tp-sidebar-menu").removeClass("sidebar-opened");
+	});
 
-        // Slick Active Code
-        $slickActive.slick({
-          autoplay: autoPlayVar,
-          dots: paginaiton,
-          centerPadding: '0',
-          speed: speedVar,
-          infinite: loopVar,
-          autoplaySpeed: autoplaySpdVar,
-          centerMode: centerVar,
-          fade: fadeVar,
-          prevArrow: $(this).find('.cs-left_arrow'),
-          nextArrow: $(this).find('.cs-right_arrow'),
-          appendDots: $(this).find('.cs-pagination'),
-          slidesToShow: slidesPerView,
-          variableWidth: variableWidthVar,
-          // slidesToScroll: slidesPerView,
-          responsive: [
-            {
-              breakpoint: 1600,
-              settings: {
-                slidesToShow: lgPoint,
-              },
-            },
-            {
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: mdPoint,
-              },
-            },
-            {
-              breakpoint: 992,
-              settings: {
-                slidesToShow: smPoint,
-              },
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: xsPoing,
-              },
-            },
-          ],
-        });
-      });
-    }
+	////////////////////////////////////////////////////
+	// 04. Body overlay Js
+	$(".body-overlay").on("click", function () {
+		$(".offcanvas__area").removeClass("opened");
+		$(".body-overlay").removeClass("opened");
+	});
 
-    if ($.exists('.cs-moving_carousel_1')) {
-      $('.cs-moving_carousel_1').slick({
-        autoplay: true,
-        autoplaySpeed: 0,
-        speed: 8000,
-        pauseOnHover: false,
-        cssEase: 'linear',
-        variableWidth: true,
-        prevArrow: false,
-        nextArrow: false
-      });
-    }
 
-    if ($.exists('.cs-moving_carousel_2')) {
-      $('.cs-moving_carousel_2').slick({
-        autoplay: true,
-        autoplaySpeed: 0,
-        speed: 8000,
-        pauseOnHover: false,
-        cssEase: 'linear',
-        variableWidth: true,
-        prevArrow: false,
-        nextArrow: false,
-      });
-    }
+	////////////////////////////////////////////////////
+	// 05. Search Js
+	$(".search-toggle").on("click", function () {
+		$(".search__area").addClass("opened");
+	});
+	$(".search-close-btn").on("click", function () {
+		$(".search__area").removeClass("opened");
+	});
 
-    $('.slider-for').slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false,
-      asNavFor: '.slider-nav'
-    });
 
-    $('.slider-nav').slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      asNavFor: '.slider-for',
-      dots: false,
-      arrows: false,
-      focusOnSelect: true
-    });
+	////////////////////////////////////////////////////
+	// 06. Sticky Header Js
+	windowOn.on('scroll', function () {
+		var scroll = $(window).scrollTop();
+		if (scroll < 100) {
+			$("#header-sticky").removeClass("header-sticky");
+		} else {
+			$("#header-sticky").addClass("header-sticky");
+		}
+	});
 
-  }
 
-  /*--------------------------------------------------------------
-    9. Isotop Initialize
-  --------------------------------------------------------------*/
-  function isotopInit() {
-    if ($.exists('.cs-isotop')) {
-      $('.cs-isotop').isotope({
-        itemSelector: '.cs-isotop_item',
-        transitionDuration: '0.60s',
-        percentPosition: true,
-        masonry: {
-          columnWidth: '.cs-grid_sizer',
-        },
-      });
-      /* Active Class of Portfolio*/
-      $('.cs-isotop_filter ul li').on('click', function (event) {
-        $(this).siblings('.active').removeClass('active');
-        $(this).addClass('active');
-        event.preventDefault();
-      });
-      /*=== Portfolio filtering ===*/
-      $('.cs-isotop_filter ul').on('click', 'a', function () {
-        var filterElement = $(this).attr('data-filter');
-        $(this).parents('.cs-isotop_filter').siblings('.cs-isotop').isotope({
-          filter: filterElement,
-        });
-      });
-    }
-  }
+	////////////////////////////////////////////////////
+	// 07. Data CSS Js
+	$("[data-background").each(function () {
+		$(this).css("background-image", "url( " + $(this).attr("data-background") + "  )");
+	});
 
-  /*--------------------------------------------------------------
-    10. Modal Video
-  --------------------------------------------------------------*/
-  function modalVideo() {
-    $(document).on('click', '.cs-video_open', function (e) {
-      e.preventDefault();
-      var video = $(this).attr('href');
-      $('.cs-video_popup_container iframe').attr('src', video);
-      $('.cs-video_popup').addClass('active');
-    });
-    $('.cs-video_popup_close, .cs-video_popup_layer').on('click', function (e) {
-      $('.cs-video_popup').removeClass('active');
-      $('html').removeClass('overflow-hidden');
-      $('.cs-video_popup_container iframe').attr('src', 'about:blank');
-      e.preventDefault();
-    });
-  }
+	$("[data-width]").each(function () {
+		$(this).css("width", $(this).attr("data-width"));
+	});
 
-  /*--------------------------------------------------------------
-    11. Tabs
-  --------------------------------------------------------------*/
-  function tabs() {
-    $('.cs-tabs.cs-fade_tabs .cs-tab_links a').on('click', function (e) {
-      var currentAttrValue = $(this).attr('href');
-      $('.cs-tabs ' + currentAttrValue)
-        .fadeIn(400)
-        .siblings()
-        .hide();
-      $(this).parents('li').addClass('active').siblings().removeClass('active');
-      e.preventDefault();
-    });
-  }
+	$("[data-bg-color]").each(function () {
+		$(this).css("background-color", $(this).attr("data-bg-color"));
+	});
 
-  /*--------------------------------------------------------------
-    12. Accordian
-  --------------------------------------------------------------*/
-  function accordian() {
-    $('.cs-accordian').children('.cs-accordian-body').hide();
-    $('.cs-accordian.active').children('.cs-accordian-body').show();
-    $('.cs-accordian_head').on('click', function () {
-      $(this)
-        .parent('.cs-accordian')
-        .siblings()
-        .children('.cs-accordian-body')
-        .slideUp(250);
-      $(this).siblings().slideDown(250);
-      /* Accordian Active Class */
-      $(this).parents('.cs-accordian').addClass('active');
-      $(this).parent('.cs-accordian').siblings().removeClass('active');
-    });
-  }
+	////////////////////////////////////////////////////
+	// 08. Nice Select Js
+	$('select').niceSelect();
 
-  /*--------------------------------------------------------------
-    13. CountDown
-  --------------------------------------------------------------*/
-  function countDown() {
-    if ($.exists('.cs-countdown')) {
-      $('.cs-countdown').each(function () {
-        var _this = this;
-        var el = $(_this).data('countdate');
-        var countDownDate = new Date(el).getTime();
-        var x = setInterval(function () {
-          var now = new Date().getTime();
-          var distance = countDownDate - now;
-          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          var hours = Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          );
-          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-          $(_this).find('.cs-count_days').html(days);
-          $(_this).find('.cs-count_hours').html(hours);
-          $(_this).find('.cs-count_minutes').html(minutes);
-          $(_this).find('.cs-count_seconds').html(seconds);
 
-          if (distance < 0) {
-            clearInterval(x);
-            $(_this).find('.cs-count_days').html(0);
-            $(_this).find('.cs-count_hours').html(0);
-            $(_this).find('.cs-count_minutes').html(0);
-            $(_this).find('.cs-count_seconds').html(0);
-          }
-        }, 1000);
-      });
-    }
-  }
+	// mainSlider
+	function mainSlider() {
+		var BasicSlider = $('.slider-active');
+		BasicSlider.on('init', function (e, slick) {
+			var $firstAnimatingElements = $('.single-slider:first-child').find('[data-animation]');
+			doAnimations($firstAnimatingElements);
+		});
+		BasicSlider.on('beforeChange', function (e, slick, currentSlide, nextSlide) {
+			var $animatingElements = $('.single-slider[data-slick-index="' + nextSlide + '"]').find('[data-animation]');
+			doAnimations($animatingElements);
+		});
+		BasicSlider.slick({
+			autoplay: false,
+			autoplaySpeed: 4000,
+			dots: false,
+			fade: true,
+			arrows: true,
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			prevArrow: '<button type="button" class="slick-prev"><i class="fi fi-ss-angle-left"></i></button>',
+			nextArrow: '<button type="button" class="slick-next"><i class="fi fi-ss-angle-right"></i></button>',
+			responsive: [{
+				breakpoint: 767,
+				settings: {
+					dots: false,
+					arrows: true,
+				}
+			}]
+		});
 
-  /*--------------------------------------------------------------
-    14. Mode Switcher
-  --------------------------------------------------------------*/
-  function modeSwitcher() {
-    $("#mode_switch").change(function() {
-      $("body").toggleClass("cs-dark", this.checked)
-    }).change();
-  }
+		function doAnimations(elements) {
+			var animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+			elements.each(function () {
+				var $this = $(this);
+				var $animationDelay = $this.data('delay');
+				var $animationType = 'animated ' + $this.data('animation');
+				$this.css({
+					'animation-delay': $animationDelay,
+					'-webkit-animation-delay': $animationDelay
+				});
+				$this.addClass($animationType).one(animationEndEvents, function () {
+					$this.removeClass($animationType);
+				});
+			});
+		}
+	}
+	mainSlider();
 
-})(jQuery); // End of use strict
+	////////////////////////////////////////////////////
+	// 09. brand-active
+
+	$('.tp-brand-active').slick({
+		dots: false,
+		infinite: true,
+		autoplaySpeed: 2000,
+		slidesToShow: 5,
+		slidesToScroll: 1,
+		autoplay: true,
+		arrows: false,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1,
+					infinite: true,
+				}
+			},
+			{
+				breakpoint: 600,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}
+		]
+	});
+
+	////////////////////////////////////////////////////
+	// 10. testimonial-active
+	$('.testimonial-active').slick({
+		infinite: true,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		prevArrow: '<button type="button" class="slick-prev"><i class="arrow_carrot-left"></i></button>',
+		nextArrow: '<button type="button" class="slick-next"><i class="arrow_carrot-right"></i></button>',
+		arrows: true,
+		appendArrows: $(".tp-section-arrow"),
+		dots: false,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2,
+				}
+			},
+			{
+				breakpoint: 992,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 2
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 576,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 768,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}
+
+		]
+	});
+
+	////////////////////////////////////////////////////
+	// 10. testimonial-active
+
+	$('.testimonial--active').slick({
+		infinite: true,
+		slidesToShow: 2,
+		slidesToScroll: 1,
+		prevArrow: '<button type="button" class="slick-prev"><i class="arrow_carrot-left"></i></button>',
+		nextArrow: '<button type="button" class="slick-next"><i class="arrow_carrot-right"></i></button>',
+		arrows: true,
+		appendArrows: $(".tp-section-arrow"),
+		dots: false,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2,
+				}
+			},
+			{
+				breakpoint: 992,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 2
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 576,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 768,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}
+
+		]
+	});
+
+
+	$('.testimonial-active-box').slick({
+		infinite: true,
+		autoplay:true,
+		slidesToShow: 2,
+		slidesToScroll: 1,
+		prevArrow: '<button type="button" class="slick-prev"><i class="arrow_carrot-left"></i></button>',
+		nextArrow: '<button type="button" class="slick-next"><i class="arrow_carrot-right"></i></button>',
+		arrows: false,
+		appendArrows: $(".tp-section-arrow"),
+		dots: false,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2,
+				}
+			},
+			{
+				breakpoint: 992,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 2
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 576,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 768,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}
+
+		]
+	});
+
+	////////////////////////////////////////////////////
+	// 11. instructor-active
+
+	$('.intruc-active').slick({
+		infinite: true,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		prevArrow: '<button type="button" class="slick-prev"><i class="arrow_carrot-left"></i></button>',
+		nextArrow: '<button type="button" class="slick-next"><i class="arrow_carrot-right"></i></button>',
+		arrows: true,
+		appendArrows: $(".tp-instruc-arrow"),
+		dots: false,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 3,
+				}
+			},
+			{
+				breakpoint: 992,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 576,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 768,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}
+
+		]
+	});
+
+	$('.intruc-active-two').slick({
+		infinite: true,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		prevArrow: '<button type="button" class="slick-prev"><i class="arrow_carrot-left"></i></button>',
+		nextArrow: '<button type="button" class="slick-next"><i class="arrow_carrot-right"></i></button>',
+		arrows: false,
+		appendArrows: $(".tp-instruc-arrow"),
+		dots: false,
+		autoplay:true,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 3,
+				}
+			},
+			{
+				breakpoint: 992,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 576,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 768,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}
+
+		]
+	});
+
+	////////////////////////////////////////////////////
+	// 12. Masonary Js
+	$('.grid').imagesLoaded(function () {
+		// init Isotope
+		var $grid = $('.grid').isotope({
+			itemSelector: '.grid-item',
+			percentPosition: true,
+			masonry: {
+				// use outer width of grid-sizer for columnWidth
+				columnWidth: '.grid-item',
+			}
+		});
+
+
+		// filter items on button click
+		$('.masonary-menu').on('click', 'button', function () {
+			var filterValue = $(this).attr('data-filter');
+			$grid.isotope({ filter: filterValue });
+		});
+
+		//for menu active class
+		$('.masonary-menu button').on('click', function (event) {
+			$(this).siblings('.active').removeClass('active');
+			$(this).addClass('active');
+			event.preventDefault();
+		});
+
+	});
+
+	/* magnificPopup img view */
+	$('.popup-image').magnificPopup({
+		type: 'image',
+		gallery: {
+			enabled: true
+		}
+	});
+
+	/* magnificPopup video view */
+	$(".popup-video").magnificPopup({
+		type: "iframe",
+	});
+
+	////////////////////////////////////////////////////
+	// 13. Wow Js
+	new WOW().init();
+
+	////////////////////////////////////////////////////
+	// 14. Cart Quantity Js
+	$('.cart-minus').click(function () {
+		var $input = $(this).parent().find('input');
+		var count = parseInt($input.val()) - 1;
+		count = count < 1 ? 1 : count;
+		$input.val(count);
+		$input.change();
+		return false;
+	});
+	$('.cart-plus').click(function () {
+		var $input = $(this).parent().find('input');
+		$input.val(parseInt($input.val()) + 1);
+		$input.change();
+		return false;
+	});
+
+
+	////////////////////////////////////////////////////
+	// 15. Show Login Toggle Js
+	$('#showlogin').on('click', function () {
+		$('#checkout-login').slideToggle(900);
+	});
+
+	////////////////////////////////////////////////////
+	// 16. Show Coupon Toggle Js
+	$('#showcoupon').on('click', function () {
+		$('#checkout_coupon').slideToggle(900);
+	});
+
+	////////////////////////////////////////////////////
+	// 17. Create An Account Toggle Js
+	$('#cbox').on('click', function () {
+		$('#cbox_info').slideToggle(900);
+	});
+
+	////////////////////////////////////////////////////
+	// 18. Shipping Box Toggle Js
+	$('#ship-box').on('click', function () {
+		$('#ship-box-info').slideToggle(1000);
+	});
+
+	////////////////////////////////////////////////////
+	// 19. Counter Js
+	$('.counter').counterUp({
+		delay: 10,
+		time: 1000
+	});
+
+	////////////////////////////////////////////////////
+	// 20. Parallax Js
+	if ($('.scene').length > 0) {
+		$('.scene').parallax({
+			scalarX: 10.0,
+			scalarY: 15.0,
+		});
+	};
+
+	////////////////////////////////////////////////////
+	// 21. InHover Active Js
+	$('.hover__active').on('mouseenter', function () {
+		$(this).addClass('active').parent().siblings().find('.hover__active').removeClass('active');
+	});
+
+	////////////////////////////////////////////////////
+	// 22. Blog Active Js
+	
+	$('.blog-item-active').slick({
+		infinite: true,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		prevArrow: '<button type="button" class="slick-prev"><i class="fi fi-rr-arrow-small-left"></i></button>',
+		nextArrow: '<button type="button" class="slick-next"><i class="fi fi-rr-arrow-small-right"></i></button>',
+		arrows: true,
+	});
+
+
+})(jQuery);
