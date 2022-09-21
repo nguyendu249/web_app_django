@@ -12,7 +12,7 @@ types = (
     ('Paid', 'Paid')
 )
 class Type_course(models.Model):
-    name = models.CharField(blank=False, null=False)
+    name = models.CharField(max_length=150,blank=False, null=False)
     created = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_path(self):
@@ -23,12 +23,16 @@ class Type_course(models.Model):
 
 class Course(models.Model):
     type_course = models.ForeignKey(Type_course, on_delete=models.CASCADE,related_name='courses') #Nếu type course bị xóa thì Course cũng sẽ bị xoá
-    name = models.CharField(blank=False, null=False)
+    name = models.CharField(max_length=1500,blank=False, null=False)
     slug = models.SlugField(unique_for_date='created')
-    description = models.CharField(blank=False, null=False)
-    type = models.CharField(types=types, default='Free')
+    description = models.TextField(max_length=150000,blank=False, null=False)
+    type = models.CharField(max_length=1500,choices=types, default='Free')
     price = models.IntegerField(default=0)
     image = models.ImageField(upload_to='media/course/%Y/%m/%d/', blank=False)
+    video_intro = models.CharField(max_length=1500,default='')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
 
     class Meta:
         index_together = ('id', 'slug')
@@ -42,12 +46,12 @@ class Course(models.Model):
 
 class Topic(models.Model):
     course = models.ForeignKey(Course,on_delete=models.CASCADE,related_name='topics')
-    name = models.CharField(blank=False, null=False)
-    description = models.CharField()
+    name = models.CharField(max_length=150,blank=False, null=False)
+    description = models.TextField(max_length=15000)
 
 class Lesson(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE,related_name='lessons')
-    name = models.CharField(blank=False, null=False)
-    description = models.CharField()
-    video = models.CharField(blank=False, null=False)
+    name = models.CharField(max_length=150,blank=False, null=False)
+    description = models.TextField(max_length=15000)
+    video = models.CharField(max_length=150,blank=False, null=False)
 

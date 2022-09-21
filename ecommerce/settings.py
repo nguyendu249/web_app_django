@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'store',
     'cart',
     'orders',
-    'home'
+    'home',
+    'course'
 ]
 
 LOGIN_URL = 'login'
@@ -130,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'vi-vn'
 
 TIME_ZONE = 'UTC'
 

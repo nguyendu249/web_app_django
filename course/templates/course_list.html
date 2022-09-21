@@ -1,0 +1,91 @@
+{% extends 'header.html'%}
+{% block title%}Các khóa học mới{% endblock title%}
+{% block content %}
+{% load static %}
+<!-- course-area -->
+      <section class="course-area pb-120">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="section-title text-center mb-45">
+                     <span class="tp-sub-title-box mb-15">Khóa học mới</span>
+                     <h2 class="tp-section-title mb-20">Khám khóa các khóa học mới được cập nhật</h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row mb-20">
+                {% for course in Courses %}
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="tpcourse mb-40">
+                            <div class="tpcourse__thumb p-relative w-img fix">
+                                <a href="course-details.html"><img src="/media/{{course.image}}" alt="course-thumb"></a>
+                                <div class="tpcourse__tag">
+                                <a href="course-details.html"><i class="fi fi-rr-heart"></i></a>
+                                </div>
+                                <div class="tpcourse__img-icon">
+                                {% comment %} <img src="/media/{{course.image}}" alt="course-avata"> {% endcomment %}
+                                </div>
+                            </div>
+                            <div class="tpcourse__content-2">
+                                <div class="tpcourse__category mb-10">
+                                <ul class="tpcourse__price-list d-flex align-items-center">
+                                    <li><a class="c-color-yellow" href="course-details.html">{{course.type_course}}</a></li>
+                                </ul>
+                                </div>
+                                <div class="tpcourse__ava-title mb-15">
+                                <h4 class="tpcourse__title tp-cours-title-color"><a href="{{course.slug}}">{{course.name}}</a></h4>
+                                </div>
+                                <div class="tpcourse__meta tpcourse__meta-gap pb-15 mb-15">
+                                <ul class="d-flex align-items-center">
+                                    <li><img src="assets/img/icon/c-meta-01.png" alt="meta-icon"> <span>35 Classes</span></li>
+                                    <li><img src="assets/img/icon/c-meta-02.png" alt="meta-icon"> <span>291 Students</span></li>
+                                </ul>
+                                </div>
+                                <div class="tpcourse__rating d-flex align-items-center justify-content-between">
+                                <div class="tpcourse__rating-icon">
+                                    <span>4.7</span>
+                                    <i class="fi fi-ss-star"></i>
+                                    <i class="fi fi-ss-star"></i>
+                                    <i class="fi fi-ss-star"></i>
+                                    <i class="fi fi-ss-star"></i>
+                                    <i class="fi fi-rs-star"></i>
+                                    <p>(125)</p>
+                                </div>
+                                <div class="tpcourse__pricing">
+                                    <h5 class="price-title">{{course.price}} VNĐ</h5>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="basic-pagination">
+               <nav>
+                  <ul>
+                     <li>
+                        <a href="blog.html">
+                           <i class="far fa-angle-left"></i>
+                        </a>
+                     </li>
+                     <li>
+                        <span class="current">1</span>
+                     </li>
+                     <li>
+                        <a href="blog.html">2</a>
+                     </li>
+                     <li>
+                        <a href="blog.html">3</a>
+                     </li>
+                     <li>
+                        <a href="blog.html">
+                           <i class="far fa-angle-right"></i>
+                        </a>
+                     </li>
+                  </ul>
+                </nav>
+            </div>
+         </div>
+      </section>
+      <!-- course-area-end -->
+{% endblock content%}
