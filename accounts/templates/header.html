@@ -60,7 +60,7 @@
                   <div class="col-xxl-7 col-xl-6 col-lg-6 col-md-5 col-6">
                      <div class="logo-area d-flex align-items-center">
                         <div class="logo">
-                           <a href="index.html">
+                           <a href="http://127.0.0.1:8000/">
                               <img src="{% static 'assets/img/logo/logo-black.png '%}" alt="logo">
                            </a>
                         </div>
@@ -69,9 +69,9 @@
                   <div class="col-xxl-5 col-lg-6 col-md-7">
                      <div class="header-right header-right-box">
                         <div class="header-search-box">
-                           <form action="#">
+                           <form action="/">
                               <div class="search-input">
-                                 <input type="Email" placeholder="Tìm kiếm khóa học">
+                                 <input required name="name" type="text" placeholder="Tìm kiếm khóa học">
                                  <button class="header-search-btn"><i class="fi fi-rs-search mr-5"></i> Tìm kiếm...</button>
                               </div>
                            </form>
@@ -85,18 +85,10 @@
                         <nav id="mobile-menu">
                            <ul>
                               <li>
-                                 <a href="index.html">Trang chủ</a>
+                                 <a href="http://127.0.0.1:8000/">Trang chủ</a>
                               </li>
-                              <li class="has-dropdown">
+                             <li>
                                  <a href="/course">Khóa học</a>
-                                 <ul class="submenu">
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="checkout.html">Check Out</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="sign-in.html">Sign In</a></li>
-                                 </ul>
                               </li>
                               <li class="has-dropdown">
                                  <a href="blog.html">Tin tức</a>
@@ -116,11 +108,19 @@
                   </div>
                   <div class="col-xxl-3 col-xl-3 col-lg-6 d-flex align-items-center justify-content-end">
                      <div class="header-meta-green">
+                     {% if user.is_authenticated %}
                         <ul>
-                           <li><a href="sign-in.html"><i class="fi fi-rr-user"></i></a></li>
+                           <li><a href="{% url 'profile'%}"><i class="fi fi-rr-user"></i></a></li>
                            <li><a href="cart.html"><i class="fi fi-rr-shopping-bag"></i></a></li>
                            <li><a href="#" class="tp-menu-toggle d-xl-none"><i class="icon_ul"></i></a></li>
                         </ul>
+                     {% else %}
+                        <ul>
+                           <li><a href="{% url 'login' %}"><i class="fi fi-rr-user"></i></a></li>
+                           <li><a href="cart.html"><i class="fi fi-rr-shopping-bag"></i></a></li>
+                           <li><a href="#" class="tp-menu-toggle d-xl-none"><i class="icon_ul"></i></a></li>
+                        </ul>
+                     {% endif %}
                      </div>
                   </div>
                </div>
@@ -141,11 +141,19 @@
             </div>
             <div class="col-md-6 col-7 d-flex align-items-center justify-content-end">
                <div class="header-meta-green text-end">
-                  <ul>
-                     <li><a href="sign-in.html"><i class="fi fi-rr-user"></i></a></li>
-                     <li><a href="cart.html"><i class="fi fi-rr-shopping-bag"></i></a></li>
-                     <li><a href="#" class="tp-menu-toggle d-xl-none"><i class="icon_ul"></i></a></li>
-                  </ul>
+                  {% if user.is_authenticated %}
+                     <ul>
+                        <li><a href="{% url 'profile'%}"><i class="fi fi-rr-user"></i></a></li>
+                        <li><a href="cart.html"><i class="fi fi-rr-shopping-bag"></i></a></li>
+                        <li><a href="#" class="tp-menu-toggle d-xl-none"><i class="icon_ul"></i></a></li>
+                     </ul>
+                  {% else %}
+                     <ul>
+                        <li><a href="{% url 'login' %}"><i class="fi fi-rr-user"></i></a></li>
+                        <li><a href="cart.html"><i class="fi fi-rr-shopping-bag"></i></a></li>
+                        <li><a href="#" class="tp-menu-toggle d-xl-none"><i class="icon_ul"></i></a></li>
+                     </ul>
+                  {% endif %}
                </div>
             </div>
          </div>

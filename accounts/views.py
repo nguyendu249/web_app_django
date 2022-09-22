@@ -12,15 +12,14 @@ from django.urls import reverse_lazy
 
 class Register(SuccessMessageMixin, generic.CreateView):
     form_class = UserCreationForm
-    success_message = "Registration Successfull you can now login."
+    success_message = "Đăng ký thành công bạn có thể đăng nhập."
     template_name = "registration/register.html"
     success_url = reverse_lazy('login')
 
 
 @login_required
 def profile(req):
-    UserEditForm = modelform_factory(
-        get_user_model(), fields=('first_name', 'last_name', 'username'))
+    UserEditForm = modelform_factory(get_user_model(), fields=('first_name', 'last_name', 'username'))
     form = UserEditForm(instance=req.user)
     if req.method == "POST":
         form = UserEditForm(instance=req.user, data=req.POST)

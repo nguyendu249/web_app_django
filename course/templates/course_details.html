@@ -2,6 +2,7 @@
 {% block title%}{{course.name}}{% endblock title%}
 {% block content %}
 {% load static %}
+{% load humanize %}
     <!-- course-details-area -->
       <section class="c-details-area pt-30 pb-50">
          <div class="container">
@@ -52,7 +53,7 @@
                      </div>
                      <div class="course-details-widget">
                         <div class="cd-video-price">
-                           <h3 class="pricing-video text-center mb-15">{{course.price}} VNĐ</h3>
+                           <h3 class="pricing-video text-center mb-15">{{course.price|floatformat:3|intcomma}} VNĐ</h3>
                            <div class="cd-pricing-btn text-center mb-30">
                               <a class="tp-vp-btn" href="course-details.html">Mua khóa học</a>
                               <a class="tp-vp-btn-green" href="course-details.html">Tham gia ngay</a>

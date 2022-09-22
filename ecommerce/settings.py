@@ -33,16 +33,17 @@ ALLOWED_HOSTS = ['huyamazingshop.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'crispy_forms',
     'easy_thumbnails',
     'django_filters',
+    'accounts',
     'store',
     'cart',
     'orders',
@@ -52,7 +53,7 @@ INSTALLED_APPS = [
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'store:product_list'
+LOGIN_REDIRECT_URL = 'home:index'
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

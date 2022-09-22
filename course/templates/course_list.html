@@ -2,6 +2,7 @@
 {% block title%}Các khóa học mới{% endblock title%}
 {% block content %}
 {% load static %}
+{% load humanize %}
 <!-- course-area -->
       <section class="course-area pb-120">
          <div class="container">
@@ -18,9 +19,9 @@
                     <div class="col-xl-4 col-lg-6 col-md-6">
                         <div class="tpcourse mb-40">
                             <div class="tpcourse__thumb p-relative w-img fix">
-                                <a href="course-details.html"><img src="/media/{{course.image}}" alt="course-thumb"></a>
+                                <a href="{{course.slug}}"><img src="/media/{{course.image}}" alt="course-thumb"></a>
                                 <div class="tpcourse__tag">
-                                <a href="course-details.html"><i class="fi fi-rr-heart"></i></a>
+                                <a href="{{course.slug}}"><i class="fi fi-rr-heart"></i></a>
                                 </div>
                                 <div class="tpcourse__img-icon">
                                 {% comment %} <img src="/media/{{course.image}}" alt="course-avata"> {% endcomment %}
@@ -29,7 +30,7 @@
                             <div class="tpcourse__content-2">
                                 <div class="tpcourse__category mb-10">
                                 <ul class="tpcourse__price-list d-flex align-items-center">
-                                    <li><a class="c-color-yellow" href="course-details.html">{{course.type_course}}</a></li>
+                                    <li><a class="c-color-yellow" href="{{course.slug}}">{{course.type_course}}</a></li>
                                 </ul>
                                 </div>
                                 <div class="tpcourse__ava-title mb-15">
@@ -52,7 +53,7 @@
                                     <p>(125)</p>
                                 </div>
                                 <div class="tpcourse__pricing">
-                                    <h5 class="price-title">{{course.price}} VNĐ</h5>
+                                    <h5 class="price-title">{{course.price|floatformat:3|intcomma}} VNĐ</h5>
                                 </div>
                                 </div>
                             </div>
