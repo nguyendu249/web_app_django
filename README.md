@@ -1,5 +1,12 @@
 # Django e-commerce
 
+Run project with Virtual Enviroments 
+
+- run : venv\Scripts\activate
+- and run cmd in this cmd console only to stay in Virtual Enviroments 
+
+
+
 An e-commerce app made using django 3, sqlite and bootstrap 4.
 This app also uses several other packages like -
 
