@@ -20,12 +20,13 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',include('home.urls', namespace="home")),
     path('accounts/', include('accounts.urls')),
     path('store/', include('store.urls', namespace='store')),
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
-    path('',include('home.urls', namespace="home")),
-    path('course/',include('course.urls', namespace="course"))
+    path('course/',include('course.urls', namespace="course")),
+    
 ]
 
 if settings.DEBUG:
