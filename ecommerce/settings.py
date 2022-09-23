@@ -21,8 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    'secret_key', '_=4dm6vs^&ho6p29lhhkc3vh=(zl5-one3==g70o=z9b%&ddrt')
+SECRET_KEY = os.environ.get('secret_key', '_=4dm6vs^&ho6p29lhhkc3vh=(zl5-one3==g70o=z9b%&ddrt')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('debug', True)
@@ -54,6 +53,7 @@ INSTALLED_APPS = [
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home:index'
+LOGOUT_REDIRECT_URL = 'login'
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -105,7 +105,8 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306',
-    }
+    },
+    'OPTIONS': {'charset': 'utf8mb4'},
 }
 
 

@@ -9,7 +9,8 @@
                 <div class="basic-login">
                       <h3 class="text-center mb-60">Đăng ký tài khoản</h3>
                       <form method="POST">
-                        {% csrf_token %} {{form|crispy}}
+                        {% csrf_token %}
+                         {{form|crispy}}
                         <div class="mt-10"></div>
                         <button class="tp-btn w-100">Đăng ký</button>
                         <div class="or-divide"><span>hoặc</span></div>
