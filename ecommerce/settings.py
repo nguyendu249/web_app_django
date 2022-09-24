@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['huyamazingshop.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'super_inlines',
+    'nested_admin',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -160,7 +162,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 MEDIA_URL = '/media/'
-CKEDITOR_UPLOAD_PATH = '/media/file/'
+CKEDITOR_UPLOAD_PATH = 'ck_uploads/'
 STATIC_URL = '/static'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATICFILES_DIRS = [

@@ -1,6 +1,7 @@
 from email.mime import image
 from msilib import type_short
 from statistics import mode
+from tkinter.tix import Tree
 from unicodedata import name
 from django.db import models
 from django.urls import reverse
@@ -15,6 +16,7 @@ types = (
 )
 class Type_course(models.Model):
     name = models.CharField(max_length=150,blank=False, null=False)
+    slug = models.SlugField(unique_for_date='created')
     created = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_path(self):
@@ -49,11 +51,36 @@ class Course(models.Model):
 class Topic(models.Model):
     course = models.ForeignKey(Course,on_delete=models.CASCADE,related_name='topics')
     name = models.CharField(max_length=150,blank=False, null=False)
-    description = RichTextUploadingField()
+    slug = models.SlugField(unique_for_date='created')
+    description = RichTextUploadingField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        index_together = ('id', 'slug')
+        ordering = ('-created',)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('course:course_details', kwargs={'slug': self.slug})
 
 class Lesson(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE,related_name='lessons')
     name = models.CharField(max_length=150,blank=False, null=False)
+    slug = models.SlugField(unique_for_date='created')
     description = RichTextUploadingField()
     video = models.CharField(max_length=150,blank=False, null=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        index_together = ('id', 'slug')
+        ordering = ('-created',)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('course:course_details', kwargs={'slug': self.slug})
