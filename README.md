@@ -5,6 +5,7 @@ Run project with Virtual Enviroments
 - run : venv\Scripts\activate
 - start project : python manage.py runserver
 - and run cmd in this cmd console only to stay in Virtual Enviroments 
+- Create urls.py -  touch 'app/urls.py'
 
 This app also uses several other packages like :
 

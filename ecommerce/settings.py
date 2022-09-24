@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['huyamazingshop.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'ckeditor',
+    'ckeditor_uploader',
     'crispy_forms',
     'easy_thumbnails',
     'django_filters',
@@ -50,14 +53,23 @@ INSTALLED_APPS = [
     'course'
 ]
 
+#cấu hình chỉ định trang đăng nhập và đăng kí
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home:index'
 LOGOUT_REDIRECT_URL = 'login'
+#cấu hình mặc định
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+#Cấu hình gửi email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sangbg2k1@gmail.com'
+EMAIL_HOST_PASSWORD = 'tiqsnsnezwtvldhc'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Hi welcome to Django Website <noreply>'
+#cấu hình phiên bản bootrap của crispy form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
@@ -148,8 +160,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 MEDIA_URL = '/media/'
-
+CKEDITOR_UPLOAD_PATH = '/media/file/'
 STATIC_URL = '/static'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]

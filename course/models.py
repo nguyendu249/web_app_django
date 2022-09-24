@@ -4,6 +4,8 @@ from statistics import mode
 from unicodedata import name
 from django.db import models
 from django.urls import reverse
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 
@@ -25,7 +27,7 @@ class Course(models.Model):
     type_course = models.ForeignKey(Type_course, on_delete=models.CASCADE,related_name='courses') #Nếu type course bị xóa thì Course cũng sẽ bị xoá
     name = models.CharField(max_length=1500,blank=False, null=False)
     slug = models.SlugField(unique_for_date='created')
-    description = models.TextField(max_length=150000,blank=False, null=False)
+    description = RichTextUploadingField()
     type = models.CharField(max_length=1500,choices=types, default='Free')
     price = models.IntegerField(default=0)
     image = models.ImageField(upload_to='media/course/%Y/%m/%d/', blank=False)
@@ -47,11 +49,11 @@ class Course(models.Model):
 class Topic(models.Model):
     course = models.ForeignKey(Course,on_delete=models.CASCADE,related_name='topics')
     name = models.CharField(max_length=150,blank=False, null=False)
-    description = models.TextField(max_length=15000)
+    description = RichTextUploadingField()
 
 class Lesson(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE,related_name='lessons')
     name = models.CharField(max_length=150,blank=False, null=False)
-    description = models.TextField(max_length=15000)
+    description = RichTextUploadingField()
     video = models.CharField(max_length=150,blank=False, null=False)
 

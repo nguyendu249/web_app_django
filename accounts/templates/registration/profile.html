@@ -1,8 +1,11 @@
-{%extends 'header.html'%} {%load crispy_forms_tags%} {%load static%} 
-{%block content%}
-<div class="row my-4">
+{% extends 'header.html'%} 
+{% block title%}Thông tin cá nhân{% endblock%}
+{% load crispy_forms_tags%}
+{% load static%} 
+{% block content%}
+<div class="row my-4 pl-10">
   <div class="col-md-6 col-12 p-4">
-    <img src="{% static 'avatar.svg' %}" alt="Avatar" class="img-fluid" />
+    <img style="display:block; margin:auto" src="{% static 'undraw_online_test_re_kyfx.svg' %}" alt="Avatar" class="img-fluid" />
   </div>
   <div class="col-md-6 col-12 d-flex flex-column pr-60">
     <h4 class="text-center mb-3">Chỉnh sửa thông tin cá nhân</h4>
@@ -15,6 +18,9 @@
       {{form|crispy}}
       <button class="btn btn-success" type="submit">Chỉnh sửa thông tin cá nhân</button>
     </form>
+    <div class="mt-10">
+      <a href="{% url 'password_change'%}" class="btn btn-warning text-white">Đổi mật khẩu</a>
+    </div>
     <div class="mt-10">
       <a href="{% url 'logout'%}" class="btn btn-danger">Đăng xuất</a>
     </div>
