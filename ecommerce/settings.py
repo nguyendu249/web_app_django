@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'cart',
     'orders',
     'home',
-    'course'
+    'course',
+    
 ]
 
 #cấu hình chỉ định trang đăng nhập và đăng kí

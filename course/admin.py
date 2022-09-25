@@ -9,29 +9,25 @@ class TypeCourseAdmin(admin.ModelAdmin):
     list_display = ('name', 'created')
     list_filter = ['name']
     search_fields = ['name']
-    prepopulated_fields = {'slug': ('name',)}
     list_per_page = 24
-
 
 class LesonInLine(nested_admin.NestedStackedInline):
     model = Lesson
     extra = 1
     ordering = ('created',)
-    prepopulated_fields = {'slug': ('name',)}
+
 class TopicInLine(nested_admin.NestedStackedInline):
     model = Topic
     fk_name = 'course'
     extra = 1
     ordering = ('created',)
     inlines = [LesonInLine,]
-    prepopulated_fields = {'slug': ('name',)}
-
 @admin.register(Course)
 class CourseAdmin(nested_admin.NestedModelAdmin):
+    display_name = 'Khóa học'
     list_display = ('name', 'type', 'price', 'created', 'updated')
-    list_filter = ['created']
+    list_filter = ['type_course','created',]
     search_fields = ['name']
-    prepopulated_fields = {'slug': ('name',)}
     inlines = [TopicInLine]
     list_per_page = 10
 

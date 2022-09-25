@@ -209,6 +209,7 @@ table.dataTable thead .sorting_desc_disabled::after {
 .field-generic_ip_address input[type="text"],
 .field-null_boolean select,
 .field-file_path select {
+    width: 40vw;
     height: calc(2.25rem + 2px);
     padding: .375rem .75rem;
     font-size: 1rem;

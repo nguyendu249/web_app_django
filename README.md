@@ -14,6 +14,7 @@ This app also uses several other packages like :
 - pillow
 - easy-thumbnails
 - dj-database-url
+- https://github.com/theatlantic/django-nested-admin.git : neted admin 
 
 In this app admin can manage products and orders and a customer can simply register, add items to cart and then place an order, customer can also generate an invoice of his order.
 
