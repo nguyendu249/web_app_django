@@ -59,13 +59,12 @@ class Topic(models.Model):
     course = models.ForeignKey(Course,on_delete=models.CASCADE,related_name='topics')
     name = models.CharField(max_length=150,blank=False, null=False)
     slug = AutoSlugField(populate_from='name',unique_with=['created'])
-    description = RichTextUploadingField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name ="Chủ đề"
-        verbose_name_plural ="Chủ đề"
+        # verbose_name ="Chủ đề"
+        # verbose_name_plural ="Chủ đề"
         index_together = ('id', 'slug')
         ordering = ('-created',)
 
@@ -76,17 +75,17 @@ class Topic(models.Model):
         return reverse('course:course_details', kwargs={'slug': self.slug})
 
 class Lesson(models.Model):
-    verbose_name ="Bài học"
-    verbose_name_plural ="Bài học"
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE,related_name='lessons')
     name = models.CharField(max_length=150,blank=False, null=False)
     slug = AutoSlugField(populate_from='name',unique_with=['created'])
-    description = RichTextUploadingField()
-    video = models.CharField(max_length=150,blank=False, null=False)
+    video = models.TextField(blank=False, null=False)
+    time = models.CharField(max_length=150,blank=False, null=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
+        # verbose_name ="Bài học"
+        # verbose_name_plural ="Bài học"
         index_together = ('id', 'slug')
         ordering = ('-created',)
 

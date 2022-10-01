@@ -19,9 +19,9 @@
                     <div class="col-xl-4 col-lg-6 col-md-6">
                         <div class="tpcourse mb-40">
                             <div class="tpcourse__thumb p-relative w-img fix">
-                                <a href="{{course.slug}}"><img src="/media/{{course.image}}" alt="course-thumb"></a>
+                                <a href="{% url 'course:course_details' course.slug %}"><img src="/media/{{course.image}}" alt="course-thumb"></a>
                                 <div class="tpcourse__tag">
-                                <a href="{{course.slug}}"><i class="fi fi-rr-heart"></i></a>
+                                <a href="{% url 'course:course_details' course.slug %}"><i class="fi fi-rr-heart"></i></a>
                                 </div>
                                 <div class="tpcourse__img-icon">
                                 {% comment %} <img src="/media/{{course.image}}" alt="course-avata"> {% endcomment %}
@@ -30,11 +30,11 @@
                             <div class="tpcourse__content-2">
                                 <div class="tpcourse__category mb-10">
                                 <ul class="tpcourse__price-list d-flex align-items-center">
-                                    <li><a class="c-color-yellow" href="{{course.slug}}">{{course.type_course}}</a></li>
+                                    <li><a class="c-color-yellow" href="{% url 'course:course_details' course.slug %}">{{course.type_course}}</a></li>
                                 </ul>
                                 </div>
                                 <div class="tpcourse__ava-title mb-15">
-                                <h4 class="tpcourse__title tp-cours-title-color"><a href="{{course.slug}}">{{course.name}}</a></h4>
+                                <h4 class="tpcourse__title tp-cours-title-color"><a href="{% url 'course:course_details' course.slug %}">{{course.name}}</a></h4>
                                 </div>
                                 <div class="tpcourse__meta tpcourse__meta-gap pb-15 mb-15">
                                 <ul class="d-flex align-items-center">

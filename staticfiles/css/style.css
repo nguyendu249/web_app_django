@@ -5428,7 +5428,7 @@ div.choose-sub-color {
 }
 
 .sidebar__wrapper {
-  padding: 60px 30px 50px 30px;
+  padding: 15px 16px 20px 18px;
   background: var(--tp-common-white);
   box-shadow: 5px 15px 30px rgba(5, 13, 54, 0.05);
 }
