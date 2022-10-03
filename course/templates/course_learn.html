@@ -13,7 +13,7 @@
                   <div class="postbox__wrapper pr-20">
                      <article class="postbox__item format-image mb-60 transition-3">
                         <div class="postbox__thumb w-img mb-30">
-                           {{ leesons[:1].video }}
+                           {{ first_lesson.video | safe }}
                         </div>
                         <div class="postbox__content">
                            <div class="postbox__meta">
@@ -22,7 +22,7 @@
                               <span><a href="#"><i class="fi fi-rr-comments"></i> 02 Comments</a></span>
                            </div>
                            <h3 class="postbox__title">
-                              {{ course.name }}
+                              {{ first_lesson.name }}
                            </h3>
                            <div class="postbox__text">
                               <p>{{ course.description|safe}}</p>
@@ -43,7 +43,7 @@
                                     <div class="content-lesson">
                                           {% for lesson_item in lessons%}
                                              {% if lesson_item.topic_id == item.id%}
-                                                <div class="leeson-title"><a href="/"><i class="far fa-play-circle"></i> {{lesson_item.name}}</a></div>
+                                                <div class="leeson-title"><a href="{% url 'course:learn_view' course.id lesson_item.id %}"><i class="far fa-play-circle"></i> {{lesson_item.name}}</a></div>
                                              {% endif %}
                                           {% endfor %}
                                     </div>
