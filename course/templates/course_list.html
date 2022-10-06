@@ -53,7 +53,15 @@
                                     <p>(125)</p>
                                 </div>
                                 <div class="tpcourse__pricing">
-                                    <h5 class="price-title">{{course.price|floatformat:3|intcomma}} VNĐ</h5>
+                                    {% if course.type == 'Free'%}
+                                       <h5 class="price-title">
+                                          MIỄN PHÍ
+                                       </h5>
+                                    {% else %}
+                                       <h5 class="price-title">
+                                          {{course.price|floatformat:3|intcomma}} VNĐ
+                                       </h5>
+                                    {% endif %}
                                 </div>
                                 </div>
                             </div>

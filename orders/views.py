@@ -5,6 +5,7 @@ from orders.models import Order, OrderItem
 from cart.cart import Cart
 from django.db.models import Count
 from store.models import Product
+from course.models import Course
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.

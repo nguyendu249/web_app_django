@@ -64,7 +64,15 @@
                               {% if course.type == 'Free' %}
                                  <a class="tp-vp-btn" href="/course/learn/{{ course.slug }}">Tham gia ngay</a>
                               {% else %}
-                                 <a class="tp-vp-btn-green" href="/">Mua khóa học</a>
+                                 {% if course.id in cart.keys %}
+                                    <a class="tp-vp-btn-green" href="{% url 'cart:cart_details' %}">Xem giỏ hàng</a>
+                                 {% else %}
+                                    <form method="POST" action="{% url 'cart:add_course' %}">
+                                       {% csrf_token %}
+                                       <input type="hidden" name="course_id" value="{{course.id}}" />
+                                       <button class="btn-course tp-vp-btn-green" type="submit" class="btn btn-primary"> Mua khóa học</button>
+                                    </form>
+                                 {% endif %}
                               {% endif %}
                            </div>
                         </div>

@@ -5,17 +5,18 @@ class Cart:
         if(not cart):
             cart = self.session['cart'] = {}
         self.cart = cart
-
-    def add(self, productid, price, quantity=1):
-        if(quantity == 0):
-            self.remove(productid)
+    #ĐÃ FIX
+    def add(self, courseid, price):
+        if(courseid == 0):
+            self.remove(courseid)
             return
-        self.cart[productid] = {'quantity': quantity, 'price': price}
+        self.cart[courseid] = {'price': price}
         self.save()
 
-    def remove(self, productid):
-        if(productid in self.cart):
-            del self.cart[productid]
+    #ĐÃ FIX
+    def remove(self, courseid):
+        if(courseid in self.cart):
+            del self.cart[courseid]
             self.save()
 
     def save(self):

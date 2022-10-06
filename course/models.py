@@ -36,9 +36,9 @@ class Course(models.Model):
     slug = AutoSlugField(populate_from='name',unique_with=['created'])
     description = RichTextUploadingField()
     type = models.CharField(max_length=1500,choices=types, default='Free')
-    price = models.IntegerField(default=0)
+    price = models.FloatField(default=0)
     image = models.ImageField(upload_to='media/course/%Y/%m/%d/', blank=False)
-    video_intro = models.CharField(max_length=1500,default='')
+    video_intro = models.TextField(max_length=1500,default='')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

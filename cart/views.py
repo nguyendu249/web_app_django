@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from cart.cart import Cart
 from store.models import Product
+from course.models import Course
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -14,26 +15,20 @@ def add_to_cart(request):
     cart = Cart(request)
     form = CartForm(request.POST)
     if form.is_valid():
-        product_id = form.cleaned_data['product_id']
-        quantity = form.cleaned_data['quantity']
-        product = get_object_or_404(Product, id=product_id, availibility=True)
-        cart.add(product_id, product.price, quantity)
-        messages.success(request, f'{product.name} added to cart.')
+        course_id = form.cleaned_data['course_id']
+        course = get_object_or_404(Course, id=course_id)
+        cart.add(course_id, course.price)
+        messages.success(request, f'{course.name} đã được thêm vào giỏ hàng.')
     return redirect('cart:cart_details')
-
 
 @login_required
 def cart_details(request):
     cart = Cart(request)
-    products = Product.objects.filter(pk__in=cart.cart.keys())
-
-    def map_function(p):
-        pid = str(p.id)
-        q = cart.cart[pid]['quantity']
-        return {'product': p, 'quantity': q, 'total': p.price*q, 'form': CartForm(initial={'quantity': q, 'product_id': pid})}
-
-    cart_items = map(map_function, products)
-    return render(request, 'cart/cart_details.html', {'cart_items': cart_items, 'total': cart.get_total_price()})
+    courses = Course.objects.filter(pk__in=cart.cart.keys())
+    total_price = 0
+    for i in courses:
+        total_price += i.price
+    return render(request, 'cart/cart_details.html', {'cart_items': courses, 'total_price': total_price})
 
 
 @login_required

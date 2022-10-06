@@ -112,13 +112,13 @@
                      {% if user.is_authenticated %}
                         <ul>
                            <li><a href="{% url 'profile'%}"><i class="fi fi-rr-user"></i></a></li>
-                           <li><a href="cart.html"><i class="fi fi-rr-shopping-bag"></i></a></li>
+                           <li><a href="{% url 'cart:cart_details' %}"><i class="fi fi-rr-shopping-bag"></i></a></li>
                            <li><a href="#" class="tp-menu-toggle d-xl-none"><i class="icon_ul"></i></a></li>
                         </ul>
                      {% else %}
                         <ul>
                            <li><a href="{% url 'login' %}"><i class="fi fi-rr-user"></i></a></li>
-                           <li><a href="cart.html"><i class="fi fi-rr-shopping-bag"></i></a></li>
+                           <li><a href="{% url 'cart:cart_details' %}"><i class="fi fi-rr-shopping-bag"></i></a></li>
                            <li><a href="#" class="tp-menu-toggle d-xl-none"><i class="icon_ul"></i></a></li>
                         </ul>
                      {% endif %}
@@ -145,13 +145,13 @@
                   {% if user.is_authenticated %}
                      <ul>
                         <li><a href="{% url 'profile'%}"><i class="fi fi-rr-user"></i></a></li>
-                        <li><a href="cart.html"><i class="fi fi-rr-shopping-bag"></i></a></li>
+                        <li><a href="/cart"><i class="fi fi-rr-shopping-bag"></i></a></li>
                         <li><a href="#" class="tp-menu-toggle d-xl-none"><i class="icon_ul"></i></a></li>
                      </ul>
                   {% else %}
                      <ul>
                         <li><a href="{% url 'login' %}"><i class="fi fi-rr-user"></i></a></li>
-                        <li><a href="cart.html"><i class="fi fi-rr-shopping-bag"></i></a></li>
+                        <li><a href="/cart"><i class="fi fi-rr-shopping-bag"></i></a></li>
                         <li><a href="#" class="tp-menu-toggle d-xl-none"><i class="icon_ul"></i></a></li>
                      </ul>
                   {% endif %}

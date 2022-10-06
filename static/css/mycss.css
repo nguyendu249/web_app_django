@@ -10,28 +10,28 @@
     
     }
   
-    .topic-border{
-      border-color: #dddddd;
-      border-bottom: 1px groove ;
-    }
-  
-    .content-lesson {
-      line-height: 20px;
-      padding: 0px 0px 0px 5px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease-out;
-    }
-  
-    .leeson-title{
-      margin: 10px 0 14px 0;
-      font-size: 20px;  
-    }
-  
-    .leeson-title:hover {
-      color: #428bca; 
-    }
+.topic-border{
+  border-color: #dddddd;
+  border-bottom: 1px groove ;
+}
 
-    .course-content{
-        
-    }
+.content-lesson {
+  line-height: 20px;
+  padding: 0px 0px 0px 5px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.leeson-title{
+  margin: 10px 0 14px 0;
+  font-size: 20px;  
+}
+
+.leeson-title:hover {
+  color: #428bca; 
+}
+
+.btn-course{
+  width: 100%;
+}

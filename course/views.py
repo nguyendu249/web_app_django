@@ -18,7 +18,7 @@ def LearnCourse(request, slug):
     for topic in topics:
         for item in Lesson.objects.filter(topic_id = topic.id).order_by('id'):
             lesson_aray.append(item)
-    first_lesson = lesson_aray[0].video
+    first_lesson = lesson_aray[0]
     # lessons = Lesson.objects.all().order_by('id')
     # for topic in topics:
     #     for lesson in lessons:
