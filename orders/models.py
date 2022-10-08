@@ -1,3 +1,4 @@
+from statistics import mode
 from django.db import models
 from django.conf import settings
 from course.models import Course
@@ -12,10 +13,14 @@ choices = (
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='orders', on_delete=models.CASCADE)
+    name = models.CharField(max_length=50,blank=False, null=False)
+    phone = models.CharField(max_length=15,blank=False, null=False)
     status = models.CharField(choices=choices, max_length=10, default='0')
     total_price = models.FloatField(null=False, blank=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+
     class Meta:
         ordering = ('-created',)
 
@@ -28,7 +33,7 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, related_name='ordered')
+    course = models.ForeignKey(Course, related_name='ordered', on_delete=models.CASCADE)
     total = models.FloatField(null=False, blank=False)
 
     def __str__(self):
