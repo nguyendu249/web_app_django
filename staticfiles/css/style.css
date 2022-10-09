@@ -1729,6 +1729,7 @@ img {
 .header-meta-green ul {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .header-meta-green ul li a {
   font-size: 20px;
@@ -1741,6 +1742,7 @@ img {
   color: #245D51;
   background-color: rgba(36, 93, 81, 0.1);
   margin-left: 20px;
+  margin-left: 15px;
 }
 @media (max-width: 767px) {
   .header-meta-green ul li a {

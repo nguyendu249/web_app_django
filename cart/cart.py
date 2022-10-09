@@ -25,6 +25,8 @@ class Cart:
     def get_total_price(self):
         return sum(1*i['price'] for i in self.cart.values())
 
+    def __len__(self):
+        return sum(i['quantity'] for i in self.cart.values())
 
     def empty(self):
         return len(self.cart) == 0

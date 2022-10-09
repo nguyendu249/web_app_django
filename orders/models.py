@@ -13,12 +13,12 @@ choices = (
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='orders', on_delete=models.CASCADE)
-    name = models.CharField(max_length=50,blank=False, null=False)
-    phone = models.CharField(max_length=15,blank=False, null=False)
-    status = models.CharField(choices=choices, max_length=10, default='0')
-    total_price = models.FloatField(null=False, blank=False)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    name = models.CharField(verbose_name = "Tên",max_length=50,blank=False, null=False)
+    phone = models.CharField(verbose_name = "Số điện thoại",max_length=15,blank=False, null=False)
+    status = models.CharField(verbose_name = "Trạng thái",choices=choices, max_length=10, default='0')
+    total_price = models.FloatField(verbose_name = "Tổng tiền",null=False, blank=False)
+    created = models.DateTimeField(verbose_name = "Ngày tạo",auto_now_add=True)
+    updated = models.DateTimeField(verbose_name = "Ngày chỉnh sửa gần nhất",auto_now=True)
 
 
     class Meta:

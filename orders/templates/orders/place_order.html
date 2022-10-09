@@ -25,7 +25,9 @@
       <div class="card card-body">
         <h3 class="mb-3">Thông tin người đặt hàng</h3>
         <form method="POST">
-          {% csrf_token %} {{form|crispy}} {% if cart.empty %}
+          {% csrf_token %} 
+          {{form|crispy}} 
+          {% if cart.empty %}
             <div class="mt-10">
               <div class="alert alert-danger my-2">Giỏ hàng trống.</div>
               <button disabled class="btn btn-success">Đặt hàng</button>

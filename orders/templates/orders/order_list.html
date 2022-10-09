@@ -1,55 +1,195 @@
-{% extends 'base.html' %} {% block title %}Your Orders {% endblock title %}
+{% extends 'header.html' %} {% block title %}Khóa học của tôi {% endblock title %}
+{% load static %}
 {% block content %}
-<h1 class="font-weight-light mt-3">Your Orders</h1>
-<hr />
-<ul class="list-group my-3">
-  {% for order in orders %}
-  <li class="list-group-item">
-    <h5 class="mb-2">
-      {% if order.status == 'Delivered' %}
-      <span class="badge badge-success font-weight-light">
-        {{order.status}}
-      </span>
-      {% else %}
-      <span class="badge badge-info font-weight-light">{{order.status}}</span>
-      {% endif %}
-    </h5>
-    <h3>
-      <a href="{% url 'orders:details' order.id %}">Order id - {{order.id}}</a>
-    </h3>
-    <h5>{{order.total_price}}VNĐ</h5>
-    <p class="mb-0">{{order.total_items}} Items</p>
-    <p class="mb-0">
-      Delivery Address - {{order.address}}, {{order.city}}, {{order.pin_code}}
-    </p>
-    <p class="mb-0">Placed {{order.created|timesince}} ago.</p>
-  </li>
-  {% empty %}
-  <li class="list-group-item text-center border-white">
-    <h3 class="font-weight-light">You haven't placed any orders.</h3>
-    <a href="{% url 'store:product_list' %}" class="btn btn-secondary">
-      Continue Shopping
-    </a>
-  </li>
-  {% endfor %}
-</ul>
-{% with page_obj as page %}
-<p>Page <b>{{page.number}}</b> of <b>{{page.paginator.num_pages}}</b></p>
-<nav>
-  <ul class="pagination">
-    {% if page.has_previous %}
-    <li class="page-item">
-      <a href="?page={{page.previous_page_number}}" class="page-link">
-        Previous
+{% comment %} <div>
+  <h1 class="font-weight-light mt-3">Khóa học của tôi</h1>
+  <ul class="list-group my-3">
+    {% for order in orders %}
+    <li class="list-group-item">
+      <h5 class="mb-2">
+        {% if order.status == 'Delivered' %}
+        <span class="badge badge-success font-weight-light">
+          {{order.status}}
+        </span>
+        {% else %}
+        <span class="badge badge-info font-weight-light">{{order.status}}</span>
+        {% endif %}
+      </h5>
+      <h3>
+        <a href="{% url 'orders:details' order.id %}">Order id - {{order.id}}</a>
+      </h3>
+      <h5>{{order.total_price}}VNĐ</h5>
+      <p class="mb-0">{{order.total_items}} Items</p>
+      <p class="mb-0">
+        Delivery Address - 123 Giảng võ
+      </p>
+      <p class="mb-0">Đặt hàng vào {{order.created|timesince}} trước.</p>
+    </li>
+    {% empty %}
+    <li class="list-group-item text-center border-white">
+      <h3 class="font-weight-light">Bạn chưa đăng ký khóa học nào.</h3>
+      <a href="{% url 'store:product_list' %}" class="btn btn-secondary">
+        Xem thêm khóa học
       </a>
     </li>
-    {% endif %}
-    <li class="page-item active"><a href="#" class="page-link">1</a></li>
-    {% if page.has_next %}
-    <li class="page-item">
-      <a href="?page={{page.next_page_number}}" class="page-link">Next</a>
-    </li>
-    {% endif %}
+    {% endfor %}
   </ul>
-</nav>
-{% endwith %} {% endblock content %}
+  {% with page_obj as page %}
+  <p>Page <b>{{page.number}}</b> of <b>{{page.paginator.num_pages}}</b></p>
+  <nav>
+    <ul class="pagination">
+      {% if page.has_previous %}
+      <li class="page-item">
+        <a href="?page={{page.previous_page_number}}" class="page-link">
+          Previous
+        </a>
+      </li>
+      {% endif %}
+      <li class="page-item active"><a href="#" class="page-link">1</a></li>
+      {% if page.has_next %}
+      <li class="page-item">
+        <a href="?page={{page.next_page_number}}" class="page-link">Next</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div> {% endcomment %}
+{% comment %} {% endwith %} {% endcomment %}
+
+<main>
+
+  <!-- breadcrumb-area -->
+  <section class="breadcrumb__area include-bg pt-100 pb-100 breadcrumb__overlay" data-background="{% static 'assets/img/banner/25.jpg' %}">
+     <div class="container">
+        <div class="row">
+           <div class="col-xxl-12">
+              <div class="breadcrumb__content p-relative z-index-1">
+                 <h3 class="breadcrumb__title mb-20">Học viên : {{ user.first_name}} {{ user.last_name }}</h3>
+                 <div class="breadcrumb__list">
+                    <span><a href="index.html">Trang chủ</a></span>
+                    <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                    <span><a href="instructor.html">Khóa học của tôi</a></span>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </section>
+  <!-- breadcrumb-area-end -->
+
+  <!-- instructor-portfolio-area -->
+  <section class="instructor-portfolio pt-80 pb-80">
+     <div class="container">
+        <div class="row">
+           <div class="col-xl-4 col-lg-5">
+              <div class="instruc-sidebar mb-40">
+                 <div class="isntruc-side-thumb mb-30">
+                    <img src="{% static 'assets/img/bg/meo.jpg' %}" alt="instructor-thumb">
+                 </div>
+                 <div class="instructor-sidebar-widget">
+                    <div class="isntruc-side-content text-center">
+                       <h4 class="side-instructor-title mb-15">Thông tin học viên</h4>
+                       <p>UX/UI Designer, Chemical Engineer, Youtuber, Life Style Blogger</p>
+                    </div>
+                    <div class="instruc-side-btn text-center mb-40">
+                       <a class="ins-btn" href="#">Xem thêm các khóa học</a>
+                    </div>
+                    <div class="cd-information instruc-profile-info mb-35">
+                       <ul>
+                          <li><label>Họ tên : {{ user.first_name}} {{ user.last_name }}</label></li>
+                          <li><label>Email : {{ user.email}}</label></li>
+                          <li><label>Ngày đăng ký : {{ user.date_joined|date}}</label></li>
+                       </ul>
+                    </div>
+                    <div class="c-details-social">
+                       <h5 class="cd-social-title mb-25">Theo dõi:</h5>
+                       <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                       <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                       <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                       <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                 </div>
+              </div>
+           </div>
+           <div class="col-xl-8 col-lg-7">
+              <div class="instructor-main-content ml-30 mb-40">
+                 <div class="instructor-tp-course">
+                    <div class="row">
+                       <div class="col-md-12">
+                          <div class="instruc-biography">
+                             <h2 class="ins-bio-title mb-35">KHOÁ HỌC CỦA TÔI</h2>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="row">
+                      {% for course in course_list %}
+                       <div class="col-xl-6 col-lg-12 col-md-6">
+                          <div class="tpcourse mb-40">
+                             <div class="tpcourse__thumb p-relative w-img fix">
+                                <a href="course-details.html"><img src="/media/{{course.image}}" alt="course-thumb"></a>
+                                <div class="tpcourse__tag">
+                                   <a href="#"><i class="fi fi-rr-heart"></i></a>
+                                </div>
+                             </div>
+                             <div class="tpcourse__content-2">
+                                <div class="tpcourse__category mb-10">
+                                   <ul class="tpcourse__price-list d-flex align-items-center">
+                                      <li><a class="c-color-yellow" href="course-details.html">Design</a></li>
+                                   </ul>
+                                </div>
+                                <div class="tpcourse__ava-title mb-15">
+                                   <h4 class="tpcourse__title"><a href="course-details.html">{{course.name}}</a></h4>
+                                </div>
+                                <div class="tpcourse__rating d-flex align-items-center justify-content-between">
+                                   <div class="tpcourse__rating-icon">
+                                      <span>4.7</span>
+                                      <i class="fi fi-ss-star"></i>
+                                      <i class="fi fi-ss-star"></i>
+                                      <i class="fi fi-ss-star"></i>
+                                      <i class="fi fi-ss-star"></i>
+                                      <i class="fi fi-rs-star"></i>
+                                      <p>(125)</p>
+                                   </div>
+                                   <div class="tpcourse__pricing">
+                                      <h5 class="price-title">200.00 VND</h5>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                       {% endfor%}                       
+                    </div>
+                    <div class="basic-pagination">
+                       <nav>
+                          <ul>
+                             <li>
+                                <a href="blog.html">
+                                   <i class="far fa-angle-left"></i>
+                                </a>
+                             </li>
+                             <li>
+                                <span class="current">1</span>
+                             </li>
+                             <li>
+                                <a href="blog.html">2</a>
+                             </li>
+                             <li>
+                                <a href="blog.html">3</a>
+                             </li>
+                             <li>
+                                <a href="blog.html">
+                                   <i class="far fa-angle-right"></i>
+                                </a>
+                             </li>
+                          </ul>
+                        </nav>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </section>
+  <!-- instructor-portfolio-area-end -->
+</main>
+{% endblock content %}

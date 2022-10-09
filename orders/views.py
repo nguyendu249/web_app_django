@@ -4,7 +4,6 @@ from orders.forms import OrderForm
 from orders.models import Order, OrderItem
 from cart.cart import Cart
 from django.db.models import Count
-from store.models import Product
 from course.models import Course
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,14 +18,12 @@ class CreateOrder(LoginRequiredMixin, generic.CreateView):
         cart = Cart(self.request)
         courses = Course.objects.filter(pk__in=cart.cart.keys())
         cart_items = map(
-            lambda p: {'course': p,'total': p.price*1}, courses)
+            lambda p: {'course': p,'total': p.price}, courses)
         context['summary'] = cart_items
         return context
 
     def form_valid(self, form):
         cart = Cart(self.request)
-        if len(cart) == 0:
-            return redirect('cart:cart_details')
         order = form.save(commit=False)
         order.user = self.request.user
         order.total_price = cart.get_total_price()
@@ -38,17 +35,22 @@ class CreateOrder(LoginRequiredMixin, generic.CreateView):
         OrderItem.objects.bulk_create(orderitems)
         cart.clear()
         messages.success(self.request, 'Đặt hàng thành công.')
-        return redirect('course:course_list')
+        return redirect('course:courselist')
 
 
 class MyOrders(LoginRequiredMixin, generic.ListView):
-    model = Order
+    model = Course,Order, OrderItem
     template_name = 'orders/order_list.html'
-    context_object_name = 'orders'
+    context_object_name = 'course_list'
     paginate_by = 20
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user).annotate(total_items=Count('items'))
+        orders = Order.objects.filter(user=self.request.user)
+        course_list = []
+        for order in orders:
+            for course_item in OrderItem.objects.filter(order_id=order.id):
+                    course_list.append(Course.objects.filter(id=course_item.course_id))
+        return course_list
 
 
 class OrderDetails(LoginRequiredMixin, generic.DetailView):

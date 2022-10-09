@@ -16,9 +16,10 @@ types = (
     ('Paid', 'Paid')
 )
 class Type_course(models.Model):
-    name = models.CharField(max_length=150,blank=False, null=False)
+    name = models.CharField(verbose_name = "Tên loại khóa học",max_length=150,blank=False, null=False)
     slug = AutoSlugField(populate_from='name',unique_with=['created'])
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(verbose_name = "Ngày tạo",auto_now_add=True)
+    updated = models.DateTimeField(verbose_name = "Ngày chỉnh sửa gần nhất",auto_now=True)
 
     class Meta:
         verbose_name ="Danh mục khóa học"
@@ -32,15 +33,15 @@ class Type_course(models.Model):
 
 class Course(models.Model):
     type_course = models.ForeignKey(Type_course, on_delete=models.CASCADE,related_name='courses') #Nếu type course bị xóa thì Course cũng sẽ bị xoá
-    name = models.CharField(max_length=1500,blank=False, null=False)
+    name = models.CharField(verbose_name = "Tên khóa học",max_length=1500,blank=False, null=False)
     slug = AutoSlugField(populate_from='name',unique_with=['created'])
-    description = RichTextUploadingField()
-    type = models.CharField(max_length=1500,choices=types, default='Free')
-    price = models.FloatField(default=0)
+    description = RichTextUploadingField(verbose_name = "Mô tả")
+    type = models.CharField(verbose_name = "Loại khóa học",max_length=1500,choices=types, default='Free')
+    price = models.FloatField(verbose_name = "Giá khóa học",default=0)
     image = models.ImageField(upload_to='media/course/%Y/%m/%d/', blank=False)
-    video_intro = models.TextField(max_length=1500,default='')
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    video_intro = models.TextField(verbose_name = "Video giới thiệu",max_length=1500,default='')
+    created = models.DateTimeField(verbose_name = "Ngày tạo",auto_now_add=True)
+    updated = models.DateTimeField(verbose_name = "Ngày chỉnh sửa gần nhất",auto_now=True)
 
 
     class Meta:
@@ -57,10 +58,10 @@ class Course(models.Model):
 
 class Topic(models.Model):
     course = models.ForeignKey(Course,on_delete=models.CASCADE,related_name='topics')
-    name = models.CharField(max_length=150,blank=False, null=False)
+    name = models.CharField(verbose_name = "Tên topic",max_length=150,blank=False, null=False)
     slug = AutoSlugField(populate_from='name',unique_with=['created'])
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(verbose_name = "Ngày tạo",auto_now_add=True)
+    updated = models.DateTimeField(verbose_name = "Ngày chỉnh sửa gần nhất",auto_now=True)
 
     class Meta:
         # verbose_name ="Chủ đề"
@@ -76,12 +77,12 @@ class Topic(models.Model):
 
 class Lesson(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE,related_name='lessons')
-    name = models.CharField(max_length=150,blank=False, null=False)
+    name = models.CharField(verbose_name = "Tên leeson",max_length=150,blank=False, null=False)
     slug = AutoSlugField(populate_from='name',unique_with=['created'])
-    video = models.TextField(blank=False, null=False)
-    time = models.CharField(max_length=150,blank=False, null=False)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    video = models.TextField(verbose_name = "Link video",blank=False, null=False)
+    time = models.CharField(verbose_name = "Thời gian",max_length=150,blank=False, null=False)
+    created = models.DateTimeField(verbose_name = "Ngày tạo",auto_now_add=True)
+    updated = models.DateTimeField(verbose_name = "Ngày chỉnh sửa gần nhất",auto_now=True)
 
     class Meta:
         # verbose_name ="Bài học"

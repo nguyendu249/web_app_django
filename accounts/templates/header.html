@@ -111,9 +111,11 @@
                      <div class="header-meta-green">
                      {% if user.is_authenticated %}
                         <ul>
+                           
                            <li><a href="{% url 'profile'%}"><i class="fi fi-rr-user"></i></a></li>
                            <li><a href="{% url 'cart:cart_details' %}"><i class="fi fi-rr-shopping-bag"></i></a></li>
                            <li><a href="#" class="tp-menu-toggle d-xl-none"><i class="icon_ul"></i></a></li>
+                           <a class="ml-20 tp-btn" href="{% url 'orders:my_course' %}">Vào học</a>
                         </ul>
                      {% else %}
                         <ul>

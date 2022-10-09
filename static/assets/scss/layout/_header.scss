@@ -467,6 +467,7 @@
     & ul {
         display: flex;
         justify-content: center;
+        align-items: center;
         & li {
             & a {
                 font-size: 20px;
@@ -478,7 +479,8 @@
                 border-radius: 50px;
                 color: #245D51;
                 background-color: rgb(36, 93, 81, .1);
-                margin-left: 20px;
+                margin-left: 10px;
+                margin-right: 20px;
                 @media #{$xs} {
                     margin-left: 10px;
                     height: 35px;
