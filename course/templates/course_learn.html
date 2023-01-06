@@ -3,6 +3,7 @@
 {% block content %}
 {% load static %}
 {% load humanize %}
+{% if status == 1%}
     <!-- course-details-area -->
       <main>
       <!-- postbox area start -->
@@ -84,7 +85,11 @@
       </div>
       <!-- postbox area end -->
    </main>
-      <!-- course-details-area-end -->
+   <!-- course-details-area-end -->
+{% else %}
+   <h2 class="text-center">Xin lỗi bạn không có quyền truy cập vào khóa học này.</h2>
+   <img class="img-access"src="{% static 'assets/img/you-are-not-allowed-to-access-this-page.png' %}">
+{% endif %}
 <script>
    var coll = document.getElementsByClassName("collapsible");
    var i;
@@ -96,7 +101,7 @@
       content.style.maxHeight = null;
       } else {
       content.style.maxHeight = content.scrollHeight + "px";
-      } 
+      }
    });
    }
 </script>

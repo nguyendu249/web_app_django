@@ -1,16 +1,41 @@
 from django.shortcuts import render
-from course.models import Course, Lesson, Topic, Type_course
+from django.contrib.auth.decorators import login_required
+from course.models import Course, Lesson, Topic
+from orders.models import OrderItem
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import generic
 # Create your views here.
+class CourseList(generic.ListView):
+    model = Course
+    paginate_by = 10
+    context_object_name = 'Courses'
+    template_name = 'course_list.html'
 
-def CourseList(request):
-    Courses = {'Courses' : Course.objects.all().order_by('created')}
-    return render(request,'course_list.html', Courses)
+    def get_queryset(self):
+        Courses = Course.objects.all().order_by('created')
+        return Courses
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+# def CourseList(request):
+#     paginate_by = 20
+#     Courses = {'Courses' : Course.objects.all().order_by('created')}
+#     return render(request,'course_list.html', Courses)
 
 def CourseDetails(request, slug):
+    status = 0
     course = Course.objects.get(slug = slug)
-    return render(request,'course_details.html', {'course' : course})
+    order_item = OrderItem.objects.filter(user = request.user)
+    for item in order_item:
+        if course.id == item.course_id:
+            status = 1
+    return render(request,'course_details.html', {'course' : course, 'status' : status})
 
+@login_required
 def LearnCourse(request, slug):
+    authUser = 0
     course = Course.objects.get(slug = slug)
     topics = Topic.objects.filter(course_id = course.id).order_by('id')
     #lấy tất cả các lesson
@@ -19,17 +44,18 @@ def LearnCourse(request, slug):
         for item in Lesson.objects.filter(topic_id = topic.id).order_by('id'):
             lesson_aray.append(item)
     first_lesson = lesson_aray[0]
-    # lessons = Lesson.objects.all().order_by('id')
-    # for topic in topics:
-    #     for lesson in lessons:
-    #         if lesson.topic_id == topic.id:
-    #             lesson_aray.append(lesson)
-    # lesson = Lesson.objects.filter(course_id = course.id).order_by('id').values()
+    #Kiểm tra khóa học có đc mua hay chưa
+    order_item = OrderItem.objects.filter(user = request.user)
+    for item in order_item:
+        if course.id == item.course_id:
+            authUser = 1
+    
     return render(request,'course_learn.html',
         {'course' : course,
         'topics' : topics,
         'lessons' : lesson_aray,
-        'first_lesson' : first_lesson
+        'first_lesson' : first_lesson,
+        'status' : authUser
 
     })
 
@@ -44,11 +70,17 @@ def LeesonView(request,course_id ,id ):
             if item.id == id:
                 lesson_select = item
     
+    #Kiểm tra khóa học có đc mua hay chưa
+    order_item = OrderItem.objects.filter(user = request.user)
+    for item in order_item:
+        if course.id == item.course_id:
+            authUser = 1
+    
     first_lesson = lesson_select
     return render(request,'course_learn.html',
         {'course' : course,
         'topics' : topics,
         'lessons' : lesson_aray,
-        'first_lesson' : first_lesson
-
+        'first_lesson' : first_lesson,
+        'status' : authUser
     })

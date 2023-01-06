@@ -23,11 +23,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('home.urls', namespace="home")),
     path('accounts/', include('accounts.urls')),
-    path('store/', include('store.urls', namespace='store')),
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('course/',include('course.urls', namespace="course")),
+    path('tin-tuc/',include('blog.urls', namespace='blog')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 if settings.DEBUG:

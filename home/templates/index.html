@@ -1,6 +1,8 @@
 {% extends 'header.html'%}
 {% block title%}E-Learning Khóa học online{% endblock title%}
 {% block content %}
+{% load humanize %}
+{% load my_filters %}
 {% load static %}
 <main>
       <!-- slider-a  rea -->
@@ -100,198 +102,40 @@
                </div>
             </div>
             <div class="row">
-               <div class="col-lg-6 col-md-12">
-                  <div class="tpcourse tp-wrap-course mb-40">
-                     <div class="row">
-                        <div class="col-xl-4 tpcourse-thumb-w">
-                           <div class="tpcourse__thumb p-relative w-img fix">
-                              <a href="course-details.html"><img src="{% static 'assets/img/course/course-img-01.jpg' %}" alt="course-thumb"></a>
-                           </div>
-                        </div>
-                        <div class="col-xl-8 tpcourse-thumb-text">
-                           <div class="tp-wrap-course__content ml-5">
-                              <div class="tp-wrap-course__heading">
-                                 <h4 class="tp-wrap-course__title mb-20"><a href="course-details.html">Master Web Design in Photoshop: Complete UI/UX Masterclass</a></h4>
+               {% for item in Courses %}
+                  <div class="col-lg-6 col-md-12">
+                     <div class="tpcourse tp-wrap-course mb-40">
+                        <div class="row">
+                           <div class="col-xl-4 tpcourse-thumb-w">
+                              <div class="tpcourse__thumb p-relative w-img fix">
+                                 <a href="{% url 'course:course_details' item.slug %}"><img src="/media/{{item.image}}" alt="course-thumb"></a>
                               </div>
-                              <div class="tpcourse__meta tp-course-line pb-20 mb-25">
-                                 <ul class="d-flex align-items-center">
-                                    <li><img src="{% static 'assets/img/icon/c-meta-01.png' %}" alt="meta-icon"> <span>35 Classes</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-02.png' %}" alt="meta-icon"> <span>291 Students</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-03.png' %}" alt="meta-icon"> <span>4.7</span></li>
-                                 </ul>
-                              </div>
-                              <div class="tpcourse__category c-price-list d-flex align-items-center justify-content-between">
-                                 <h5 class="tpcourse__course-price c-price-pac">$29.99</h5>
-                                 <ul class="tpcourse__price-list  d-flex align-items-center">
-                                    <li><a href="course-details.html">Design</a></li>
-                                    <li><a href="course-details.html">Development</a></li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-6 col-md-12">
-                  <div class="tpcourse tp-wrap-course mb-40">
-                     <div class="row">
-                        <div class="col-xl-4 tpcourse-thumb-w">
-                           <div class="tpcourse__thumb p-relative w-img fix">
-                              <a href="course-details.html"><img src="{% static 'assets/img/course/course-img-02.jpg' %}" alt="course-thumb"></a>
-                           </div>
-                        </div>
-                        <div class="col-xl-8 tpcourse-thumb-text">
-                           <div class="tp-wrap-course__content ml-5">
-                              <div class="tp-wrap-course__heading">
-                                 <h4 class="tp-wrap-course__title mb-20"><a href="course-details.html">How to Write Great Web Content - Better Search Rankings!</a></h4>
-                              </div>
-                              <div class="tpcourse__meta tp-course-line pb-20 mb-25">
-                                 <ul class="d-flex align-items-center">
-                                    <li><img src="{% static 'assets/img/icon/c-meta-01.png' %}" alt="meta-icon"> <span>35 Classes</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-02.png' %}" alt="meta-icon"> <span>291 Students</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-03.png' %}" alt="meta-icon"> <span>4.7</span></li>
-                                 </ul>
-                              </div>
-                              <div class="tpcourse__category c-price-list d-flex align-items-center justify-content-between">
-                                 <h5 class="tpcourse__course-price c-price-pac">$29.99</h5>
-                                 <ul class="tpcourse__price-list d-flex align-items-center">
-                                    <li><a href="course-details.html">Design</a></li>
-                                    <li><a href="course-details.html">Development</a></li>
-                                 </ul>
+                              <div class="tp-wrap-course__content ml-5 mt-10">
+                                 <div class="tp-wrap-course__heading">
+                                    <h2 class="tp-wrap-course__title mb-20"><a href="{% url 'course:course_details' item.slug %}">{{ item.name }}</a></h2>
+                                 </div>
+                                 <div class="tpcourse__meta tp-course-line pb-20 mb-25">
+                                    <ul class="d-flex align-items-center">
+                                       <li><img src="{% static 'assets/img/icon/c-meta-01.png' %}" alt="meta-icon"> <span>35 Classes</span></li>
+                                       <li><img src="{% static 'assets/img/icon/c-meta-02.png' %}" alt="meta-icon"> <span>291 Students</span></li>
+                                       <li><img src="{% static 'assets/img/icon/c-meta-03.png' %}" alt="meta-icon"> <span>4.7</span></li>
+                                    </ul>
+                                 </div>
+                                 <div class="tpcourse__category c-price-list d-flex align-items-center justify-content-between">
+                                    <h5 class="tpcourse__course-price c-price-pac">
+                                       {{item.price|currency}}
+                                    </h5>
+                                    
+                                    <ul class="tpcourse__price-list  d-flex align-items-center">
+                                       <li><a href="{% url 'course:course_details' item.slug %}">{{item.type_course}}</a></li>
+                                    </ul>
+                                 </div>
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
-               </div>
-               <div class="col-lg-6 col-md-12">
-                  <div class="tpcourse tp-wrap-course mb-40">
-                     <div class="row">
-                        <div class="col-xl-4 tpcourse-thumb-w">
-                           <div class="tpcourse__thumb p-relative w-img fix">
-                              <a href="course-details.html"><img src="{% static 'assets/img/course/course-img-03.jpg' %}" alt="course-thumb"></a>
-                           </div>
-                        </div>
-                        <div class="col-xl-8 tpcourse-thumb-text">
-                           <div class="tp-wrap-course__content ml-5">
-                              <div class="tp-wrap-course__heading">
-                                 <h4 class="tp-wrap-course__title mb-20"><a href="course-details.html">Dreamweaver - Coding your first website using Dreamweaver</a></h4>
-                              </div>
-                              <div class="tpcourse__meta tp-course-line pb-20 mb-25">
-                                 <ul class="d-flex align-items-center">
-                                    <li><img src="{% static 'assets/img/icon/c-meta-01.png' %}" alt="meta-icon"> <span>35 Classes</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-02.png' %}" alt="meta-icon"> <span>291 Students</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-03.png' %}" alt="meta-icon"> <span>4.7</span></li>
-                                 </ul>
-                              </div>
-                              <div class="tpcourse__category c-price-list d-flex align-items-center justify-content-between">
-                                 <h5 class="tpcourse__course-price c-price-pac">$29.99</h5>
-                                 <ul class="tpcourse__price-list d-flex align-items-center">
-                                    <li><a href="course-details.html">Design</a></li>
-                                    <li><a href="course-details.html">Development</a></li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-6 col-md-12">
-                  <div class="tpcourse tp-wrap-course mb-40">
-                     <div class="row">
-                        <div class="col-xl-4 tpcourse-thumb-w">
-                           <div class="tpcourse__thumb p-relative w-img fix">
-                              <a href="course-details.html"><img src="{% static 'assets/img/course/course-img-04.jpg' %}" alt="course-thumb"></a>
-                           </div>
-                        </div>
-                        <div class="col-xl-8 tpcourse-thumb-text">
-                           <div class="tp-wrap-course__content ml-5">
-                              <div class="tp-wrap-course__heading">
-                                 <h4 class="tp-wrap-course__title mb-20"><a href="course-details.html">WordPress 2022: The Complete WordPress Website Course</a></h4>
-                              </div>
-                              <div class="tpcourse__meta tp-course-line pb-20 mb-25">
-                                 <ul class="d-flex align-items-center">
-                                    <li><img src="{% static 'assets/img/icon/c-meta-01.png' %}" alt="meta-icon"> <span>35 Classes</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-02.png' %}" alt="meta-icon"> <span>291 Students</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-03.png' %}" alt="meta-icon"> <span>4.7</span></li>
-                                 </ul>
-                              </div>
-                              <div class="tpcourse__category c-price-list d-flex align-items-center justify-content-between">
-                                 <h5 class="tpcourse__course-price c-price-pac">$29.99</h5>
-                                 <ul class="tpcourse__price-list d-flex align-items-center">
-                                    <li><a href="course-details.html">Design</a></li>
-                                    <li><a href="course-details.html">Development</a></li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-6 col-md-12">
-                  <div class="tpcourse tp-wrap-course mb-40">
-                     <div class="row">
-                        <div class="col-xl-4 tpcourse-thumb-w">
-                           <div class="tpcourse__thumb p-relative w-img fix">
-                              <a href="course-details.html"><img src="{% static 'assets/img/course/course-img-05.jpg' %}" alt="course-thumb"></a>
-                           </div>
-                        </div>
-                        <div class="col-xl-8 tpcourse-thumb-text">
-                           <div class="tp-wrap-course__content ml-5">
-                              <div class="tp-wrap-course__heading">
-                                 <h4 class="tp-wrap-course__title mb-20"><a href="course-details.html">SEO: Structured Data & Schema Markup for Webmasters</a></h4>
-                              </div>
-                              <div class="tpcourse__meta tp-course-line pb-20 mb-25">
-                                 <ul class="d-flex align-items-center">
-                                    <li><img src="{% static 'assets/img/icon/c-meta-01.png' %}" alt="meta-icon"> <span>35 Classes</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-02.png' %}" alt="meta-icon"> <span>291 Students</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-03.png' %}" alt="meta-icon"> <span>4.7</span></li>
-                                 </ul>
-                              </div>
-                              <div class="tpcourse__category c-price-list d-flex align-items-center justify-content-between">
-                                 <h5 class="tpcourse__course-price c-price-pac">$29.99</h5>
-                                 <ul class="tpcourse__price-list d-flex align-items-center">
-                                    <li><a href="course-details.html">Design</a></li>
-                                    <li><a href="course-details.html">Development</a></li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-6 col-md-12">
-                  <div class="tpcourse tp-wrap-course mb-40">
-                     <div class="row">
-                        <div class="col-xl-4 tpcourse-thumb-w">
-                           <div class="tpcourse__thumb p-relative w-img fix">
-                              <a href="course-details.html"><img src="{% static 'assets/img/course/course-img-06.jpg' %}" alt="course-thumb"></a>
-                           </div>
-                        </div>
-                        <div class="col-xl-8 tpcourse-thumb-text">
-                           <div class="tp-wrap-course__content ml-5">
-                              <div class="tp-wrap-course__heading">
-                                 <h4 class="tp-wrap-course__title mb-20"><a href="course-details.html">Complete Web Design from Figma to Webflow to Freelancing</a></h4>
-                              </div>
-                              <div class="tpcourse__meta tp-course-line pb-20 mb-25">
-                                 <ul class="d-flex align-items-center">
-                                    <li><img src="{% static 'assets/img/icon/c-meta-01.png' %}" alt="meta-icon"> <span>35 Classes</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-02.png' %}" alt="meta-icon"> <span>291 Students</span></li>
-                                    <li><img src="{% static 'assets/img/icon/c-meta-03.png' %}" alt="meta-icon"> <span>4.7</span></li>
-                                 </ul>
-                              </div>
-                              <div class="tpcourse__category c-price-list d-flex align-items-center justify-content-between">
-                                 <h5 class="tpcourse__course-price c-price-pac">$29.99</h5>
-                                 <ul class="tpcourse__price-list d-flex align-items-center">
-                                    <li><a href="course-details.html">Design</a></li>
-                                    <li><a href="course-details.html">Development</a></li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+               {% endfor %}
             </div>
          </div>
       </section>
@@ -389,7 +233,7 @@
                      </div>
                      <div class="counter-item__content">
                         <h4 class="counter-item__title"><span class="counter">276</span>K</h4>
-                        <p>Worldwide Students</p>
+                        <p>Học viên</p>
                      </div>
                   </div>
                </div>
@@ -400,7 +244,7 @@
                      </div>
                      <div class="counter-item__content">
                         <h4 class="counter-item__title"><span class="counter">23</span>+</h4>
-                        <p>Years Experience</p>
+                        <p>Năm kinh nghiệm</p>
                      </div>
                   </div>
                </div>
@@ -411,7 +255,7 @@
                      </div>
                      <div class="counter-item__content">
                         <h4 class="counter-item__title"><span class="counter">735</span>+</h4>
-                        <p>Professional Courses</p>
+                        <p>Khóa học chuyên nghiệp</p>
                      </div>
                   </div>
                </div>
@@ -422,97 +266,14 @@
                      </div>
                      <div class="counter-item__content">
                         <h4 class="counter-item__title"><span class="counter">4.7</span>K+</h4>
-                        <p>Beautiful Review</p>
+                        <p>Đánh giá tốt</p>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </section>
-      <!-- counter-area-end -->
-
-      <!-- testimonial-area -->
-      <section class="testimonial-white-area pb-90">
-         <div class="container">
-            <div class="row justify-content-between">
-               <div class="col-lg-6 col-md-8">
-                  <div class="section-title mb-35">
-                     <span class="tp-sub-title-box mb-15">Testimonial</span>
-                     <h2 class="tp-section-title mb-20">4700+ Happy Students</h2>
-                  </div>
-               </div>
-               <div class="col-6 col-md-4">
-                  <div class="tp-section-arrow d-flex justify-content-md-end"></div>
-               </div>
-            </div>
-            <div class="testimonial--active tp-slide-space">
-               <div class="tp-test-s-item">
-                  <div class="tp-testi">
-                     <div class="tp-testi__ava d-flex align-items-center mb-15">
-                        <img src="{% static 'assets/img/icon/test-avata--1.png' %}d" alt="testi-avatar">
-                        <div class="tp-testi__avainfo ml-20">
-                           <h3 class="tp-testi__title mt-5"><a href="#">Wade Warren</a></h3>
-                           <i>UX/UI Designer</i>
-                        </div>
-                     </div>
-                     <p>Phosfluorescently aggregate bleeding-edge channels rather than global mindshare. Monotonectally enable enterprise wide strategic theme areas for worldwide initiatives. </p>
-                     <div class="tp-testi__rating mb-5">
-                        <ul class="d-flex align-items-center">
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-rs-star"></i></li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div class="tp-test-s-item">
-                  <div class="tp-testi">
-                     <div class="tp-testi__ava d-flex align-items-center mb-15">
-                        <img src="{% static 'assets/img/icon/test-avata--2.png' %}" alt="testi-avatar">
-                        <div class="tp-testi__avainfo ml-20">
-                           <h3 class="tp-testi__title mt-5"><a href="#">Guy Hawkins</a></h3>
-                           <i>Software Engineer</i>
-                        </div>
-                     </div>
-                     <p>Phosfluorescently aggregate bleeding-edge channels rather than global mindshare. Monotonectally enable enterprise wide strategic theme areas for worldwide initiatives. </p>
-                     <div class="tp-testi__rating mb-5">
-                        <ul class="d-flex align-items-center">
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-rs-star"></i></li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div class="tp-test-s-item">
-                  <div class="tp-testi">
-                     <div class="tp-testi__ava d-flex align-items-center mb-15">
-                        <img src="{% static 'assets/img/icon/test-avata--1.png' %}" alt="testi-avatar">
-                        <div class="tp-testi__avainfo ml-20">
-                           <h3 class="tp-testi__title mt-5"><a href="#">Courtney Henry</a></h3>
-                           <i>Sr. UX/UI Designer</i>
-                        </div>
-                     </div>
-                     <p>Phosfluorescently aggregate bleeding-edge channels rather than global mindshare. Monotonectally enable enterprise wide strategic theme areas for worldwide initiatives. </p>
-                     <div class="tp-testi__rating mb-5">
-                        <ul class="d-flex align-items-center">
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-ss-star"></i></li>
-                           <li><i class="fi fi-rs-star"></i></li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      <!-- testimonial-area-end -->      
+      <!-- counter-area-end -->  
       
       <!-- suitable-area -->
       <section class="suitable-area bg-bottom grey-bg pt-115 pb-90" data-background="{% static 'assets/img/bg/shape-bg-1.png' %}">
@@ -520,8 +281,8 @@
             <div class="row text-center">
                <div class="col-lg-12">
                   <div class="section-title mb-60">
-                     <span class="tp-sub-title-box mb-15">Join With Us</span>
-                     <h2 class="tp-section-title">Which One is Suitable For You?</h2>
+                     <span class="tp-sub-title-box mb-15">Tham gia các khóa học ngay</span>
+                     <h2 class="tp-section-title">Đâu là khóa học dành cho bạn?</h2>
                   </div>
                </div>
             </div>
@@ -529,10 +290,10 @@
                <div class="col-xl-6 col-lg-12">
                   <div class="tp-suit mb-30 p-relative white-bg">
                      <div class="tp-suit__content">
-                        <h4 class="tp-suit__title">Do you want to <span>Learn</span> here?</h4>
-                        <p>Dramatically supply transpa deliverables before & you.</p>
+                        <h4 class="tp-suit__title">Tham gia các khóa học về <span>Công nghệ thông tin</span></h4>
+                        <p>Các khóa học nâng cao giúp bạn làm chủ các ngôn ngữ lập trình.</p>
                         <div class="tp-suit__btn pt-5">
-                           <a href="contact.html" class="tp-border-btn">Join Now</a>
+                           <a href="contact.html" class="tp-border-btn">Tham gia ngay</a>
                         </div>
                      </div>
                      <div class="tp-suit__img">
@@ -543,10 +304,10 @@
                <div class="col-xl-6 col-lg-12">
                   <div class="tp-suit mb-30 p-relative white-bg">
                      <div class="tp-suit__content">
-                        <h4 class="tp-suit__title">Do you want to <span>Teach</span> here?</h4>
-                        <p>Dramatically supply transpa deliverables before & you.</p>
+                        <h4 class="tp-suit__title">Tham gia các khóa học về <span>Tin học văn phòng</span></h4>
+                        <p>Tin học văn phòng căn bản và nâng cao, cải thiện khả năng sử dụng phần mềm.</p>
                         <div class="tp-suit__btn pt-5">
-                           <a href="contact.html" class="tp-border-btn">Join Now</a>
+                           <a href="contact.html" class="tp-border-btn">Tham gia ngay</a>
                         </div>
                      </div>
                      <div class="tp-suit__tech">
@@ -560,76 +321,41 @@
       <!-- suitable-area-end -->
 
       <!-- blog-area -->
-      <section class="blog-area pt-115 pb-110">
+      <section class="blog-area pt-70 pb-70">
          <div class="container">
             <div class="row">
                <div class="col-lg-12">
                   <div class="section-title mb-65 text-center">
-                     <span class="tp-sub-title-box mb-15">Latest Blogs</span>
-                     <h2 class="tp-section-title mb-20">Latest Blogs & News</h2>
+                     <span class="tp-sub-title-box mb-15">Tin tức</span>
+                     <h2 class="tp-section-title mb-20">Tin tức & bài viết mới nhất</h2>
                   </div>
                </div>
             </div>
             <div class="row">
-               <div class="col-lg-4 col-md-6">
-                  <div class="tp-blog mb-60">
-                     <div class="tp-blog__thumb p-relative">
-                        <div class="fix blog-round">
-                          <a href="blog-details.html"><img src="{% static 'assets/img/blog/blog-thumb--1.jpg' %}" alt="blog-img"></a>
+               {% for item in blogs %}
+                  <div class="col-lg-4 col-md-6">
+                     <div class="tp-blog mb-60">
+                        <div class="tp-blog__thumb p-relative">
+                           <div class="fix blog-round">
+                           <a href="{% url 'blog:blog_details' item.slug %}"><img src="/media/{{item.image}}" alt="blog-img"></a>
+                           </div>
+                           <div class="tp-blog__meta-ab">
+                              <a href="{% url 'blog:blog_details' item.slug %}"></a>
+                           </div>
                         </div>
-                        <div class="tp-blog__meta-ab">
-                           <a href="blog-details.html">Education</a> <span>-</span> 
-                           <a href="blog-details.html">Jan 21 , 2022</a>
+                        <div class="tp-blog__content blog-box p-relative">
+                           <h3 class="tp-blog__title mb-15 mt-20"><a href="{% url 'blog:blog_details' item.slug %}">{{ item.title }}</a></h3>
+                           <p></p>
+                           <span><i class="fi fi-rr-clock"></i>{{ item.created }}</span>
                         </div>
-                     </div>
-                     <div class="tp-blog__content blog-box p-relative">
-                        <h3 class="tp-blog__title mb-15 mt-20"><a href="blog-details.html">Educational Technology & Mobile Learning</a></h3>
-                        <p>Dramatically supply transparent deliverab before & you backward comp internal.</p>
-                        <span><i class="fi fi-rr-clock"></i> 2 minute read</span>
                      </div>
                   </div>
-               </div>
-               <div class="col-lg-4 col-md-6">
-                  <div class="tp-blog mb-60">
-                     <div class="tp-blog__thumb p-relative">
-                        <div class="fix blog-round">
-                           <a href="blog-details.html"><img src="{% static 'assets/img/blog/blog-thumb--3.png' %}" alt="blog-img"></a>
-                        </div>
-                        <div class="tp-blog__meta-ab">
-                           <a href="blog-details.html">Education</a> <span>-</span> 
-                           <a href="blog-details.html">Jan 21 , 2022</a>
-                        </div>
-                     </div>
-                     <div class="tp-blog__content blog-box p-relative">
-                        <h3 class="tp-blog__title mb-15 mt-20"><a href="blog-details.html">Computer Technology & Language Learning</a></h3>
-                        <p>Dramatically supply transparent deliverab before & you backward comp internal.</p>
-                        <span><i class="fi fi-rr-clock"></i> 2 minute read</span>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-lg-4 col-md-6">
-                  <div class="tp-blog mb-60">
-                     <div class="tp-blog__thumb p-relative">
-                        <div class="fix blog-round">
-                           <a href="blog-details.html"><img src="{% static 'assets/img/blog/blog-sub-thumb-03.jpg' %}" alt="blog-img"></a>
-                        </div>
-                        <div class="tp-blog__meta-ab">
-                           <a href="blog-details.html">Education</a> <span>-</span> 
-                           <a href="blog-details.html">Jan 21 , 2022</a>
-                        </div>
-                     </div>
-                     <div class="tp-blog__content blog-box p-relative">
-                        <h3 class="tp-blog__title mb-15 mt-20"><a href="blog-details.html">Electric Technology & Basic Skill Learning</a></h3>
-                        <p>Dramatically supply transparent deliverab before & you backward comp internal.</p>
-                        <span><i class="fi fi-rr-clock"></i> 2 minute read</span>
-                     </div>
-                  </div>
-               </div>
+               {% endfor %}
             </div>
             <div class="row">
                <div class="col-lg-12">
                   <div class="blog-btn text-center">
-                     <a href="blog-masonry.html" class="tp-btn">All Blog</a>
+                     <a href="{% url 'blog:blog_list' %}" class="tp-btn">Tất cả bài viết</a>
                   </div>
                </div>
             </div>

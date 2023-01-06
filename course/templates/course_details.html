@@ -1,6 +1,7 @@
 {% extends 'header.html'%}
 {% block title%}{{course.name}}{% endblock title%}
 {% block content %}
+{% load my_filter %}
 {% load static %}
 {% load humanize %}
     <!-- course-details-area -->
@@ -57,7 +58,7 @@
                               {% if course.type == 'Free' %}
                                     Miễn Phí
                               {% else %}
-                                 {{course.price|floatformat:3|intcomma}} VNĐ
+                                 {{course.price|currency}}
                               {% endif %}
                            </h3>
                            <div class="cd-pricing-btn text-center mb-30">
@@ -66,6 +67,8 @@
                               {% else %}
                                  {% if course.id in cart.keys %}
                                     <a class="tp-vp-btn-green" href="{% url 'cart:cart_details' %}">Xem giỏ hàng</a>
+                                 {% elif status == 1 %}
+                                    <a class="tp-vp-btn" href="/course/learn/{{ course.slug }}">Vào học ngay</a>
                                  {% else %}
                                     <form method="POST" action="{% url 'cart:add_course' %}">
                                        {% csrf_token %}

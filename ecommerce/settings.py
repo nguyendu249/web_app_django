@@ -48,13 +48,13 @@ INSTALLED_APPS = [
     'crispy_forms',
     'easy_thumbnails',
     'django_filters',
+    'debug_toolbar',
     'accounts',
-    'store',
     'cart',
     'orders',
     'home',
     'course',
-    
+    'blog'
 ]
 
 #cấu hình chỉ định trang đăng nhập và đăng kí
@@ -64,6 +64,7 @@ LOGIN_REDIRECT_URL = 'home:index'
 LOGOUT_REDIRECT_URL = 'login'
 #cấu hình mặc định
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+USE_THOUSAND_SEPARATOR = True
 
 #Cấu hình gửi email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -85,7 +86,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -170,6 +175,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+VNPAY_RETURN_URL = 'http://localhost:8000/payment_return'  # get from config
+VNPAY_PAYMENT_URL = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'  # get from config
+VNPAY_API_URL = 'https://sandbox.vnpayment.vn/merchant_webapi/merchant.html'
+VNPAY_TMN_CODE = 'VDQV3CN6'  # Website ID in VNPAY System, get from config
+VNPAY_HASH_SECRET_KEY = 'EAHKLIOQKHBVHTTHVRCWIDOCTHJOEEEB'  # Secret key for create checksum,get from config
 
 import django_heroku
 django_heroku.settings(locals())

@@ -1,6 +1,6 @@
 {% extends 'header.html' %} {% block title %} Giỏ hàng {% endblock title %}
 {% block content %}
-<h1 class="display-4 mt-4 text-center">Giỏ hàng</h1>
+{% comment %} <h1 class="display-4 mt-4 text-center">Giỏ hàng</h1> {% endcomment %}
 {% if cart_items %}
 <!-- cart area -->
 <section class="cart-area pt-100 pb-100">
@@ -49,8 +49,8 @@
   <a href="{% url 'orders:place' %}" class="btn btn-success">Thanh Toán</a>
 </div> {% endcomment %}
 {% else %}
-<div class="text-center">
-  <h3 class="font-weight-light">Giỏ hàng trống</h3>
+<div class="text-center mb-20">
+  <h1 class="font-weight-light ">Giỏ hàng trống</h1>
   <a href="{% url 'store:product_list' %}" class="btn btn-secondary">
     Trở lại cửa hàng
   </a>

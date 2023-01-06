@@ -34,7 +34,11 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     course = models.ForeignKey(Course, related_name='ordered', on_delete=models.CASCADE)
+    course_name = models.CharField(max_length=150,blank=False, null=False)
+    course_slug = models.CharField(max_length=150,blank=False, null=False)
+    course_price = models.FloatField(null=True, blank=True)
+    course_img = models.CharField(max_length=150,blank=False, null=False)
     total = models.FloatField(null=False, blank=False)
-
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='orders_item', on_delete=models.CASCADE)
     def __str__(self):
         return f'Order Item {self.id}'

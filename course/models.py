@@ -42,8 +42,6 @@ class Course(models.Model):
     video_intro = models.TextField(verbose_name = "Video giới thiệu",max_length=1500,default='')
     created = models.DateTimeField(verbose_name = "Ngày tạo",auto_now_add=True)
     updated = models.DateTimeField(verbose_name = "Ngày chỉnh sửa gần nhất",auto_now=True)
-
-
     class Meta:
         verbose_name ="Khóa học"
         verbose_name_plural ="Khóa học"
@@ -76,7 +74,7 @@ class Topic(models.Model):
         return reverse('course:course_details', kwargs={'slug': self.slug})
 
 class Lesson(models.Model):
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE,related_name='lessons')
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE,related_name='lessons') #khoa ngoai
     name = models.CharField(verbose_name = "Tên leeson",max_length=150,blank=False, null=False)
     slug = AutoSlugField(populate_from='name',unique_with=['created'])
     video = models.TextField(verbose_name = "Link video",blank=False, null=False)

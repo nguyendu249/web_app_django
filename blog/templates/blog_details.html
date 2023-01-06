@@ -1,0 +1,227 @@
+{% extends 'header.html'%}
+{% block title%} {{blog.title}} {% endblock title%}
+{% block content %}
+{% load static %}
+{% load humanize %}
+
+<main>
+    <div class="postbox__area pb-40">
+        <div class="container">
+           <div class="row">
+              <div class="col-xxl-8 col-xl-8 col-lg-7 col-md-12">
+                 <div class="postbox__wrapper pr-20">
+                    <article class="postbox__item format-image mb-60 transition-3">
+                       <div class="postbox__thumb w-img">
+                          <a href="blog-details.html">
+                             <img src="assets/img/blog/blog-in-1.jpg" alt="">
+                          </a>
+                       </div>
+                       <div class="postbox__content">
+                          <div class="postbox__meta">
+                             <span><i class="fi fi-rr-calendar"></i> {{blog.created}} </span>
+                             <span><a href="#"><i class="fi fi-rr-user"></i>admin</a></span>
+                          </div>
+                          <h3 class="postbox__title">
+                            {{blog.title}}
+                          </h3>
+                          <div class="postbox__text">
+                                {{ blog.description|safe|linebreaks }}
+                          </div>
+                          <div class="postbox__tag tagcloud">
+                             <span>Post Tags :</span>
+                             <a href="#">Fresh</a>
+                             <a href="#">Home</a>
+                             <a href="#">Kitchen</a>
+                          </div>
+                       </div>
+                    </article>
+                    <div class="postbox__comment mb-65">
+                       <h3 class="postbox__comment-title">3 Comments</h3>
+                       <ul>
+                          <li>
+                             <div class="postbox__comment-box grey-bg">
+                                <div class="postbox__comment-info d-flex">
+                                      <div class="postbox__comment-avater mr-20">
+                                         <img src="assets/img/blog/comments/comment-1.jpg" alt="">
+                                      </div>
+                                      <div class="postbox__comment-name">
+                                         <h5>Eleanor Fant</h5>
+                                         <span class="post-meta"> July 14, 2022</span>
+                                      </div>
+                                </div>
+                                <div class="postbox__comment-text ml-65">
+                                   <p>So I said lurgy dropped a clanger Jeffrey bugger cuppa gosh David blatant have it, standard A bit of how's your father my lady absolutely.</p>
+                                   <div class="postbox__comment-reply">
+                                      <a href="#">Reply</a>
+                                   </div>
+                                </div>
+                             </div>
+                          </li>
+                          <li class="children">
+                             <div class="postbox__comment-box grey-bg">
+                                <div class="postbox__comment-info d-flex">
+                                      <div class="postbox__comment-avater mr-20">
+                                         <img src="assets/img/blog/comments/comment-2.jpg" alt="">
+                                      </div>
+                                      <div class="postbox__comment-name">
+                                         <h5>Eleanor Fant</h5>
+                                         <span class="post-meta"> July 14, 2022</span>
+                                      </div>
+                                </div>
+                                <div class="postbox__comment-text ml-65">
+                                   <p>So I said lurgy dropped a clanger Jeffrey bugger cuppa gosh David blatant have it, standard A bit of how's your father my lady absolutely.</p>
+                                   <div class="postbox__comment-reply">
+                                      <a href="#">Reply</a>
+                                   </div>
+                                </div>
+                             </div>
+                          </li>
+                          <li>
+                             <div class="postbox__comment-box grey-bg">
+                                <div class="postbox__comment-info d-flex">
+                                      <div class="postbox__comment-avater mr-20">
+                                         <img src="assets/img/blog/comments/comment-3.jpg" alt="">
+                                      </div>
+                                      <div class="postbox__comment-name">
+                                         <h5>Eleanor Fant</h5>
+                                         <span class="post-meta"> July 14, 2022</span>
+                                      </div>
+                                </div>
+                                <div class="postbox__comment-text ml-65">
+                                   <p>So I said lurgy dropped a clanger Jeffrey bugger cuppa gosh David blatant have it, standard A bit of how's your father my lady absolutely.</p>
+                                   <div class="postbox__comment-reply">
+                                      <a href="#">Reply</a>
+                                   </div>
+                                </div>
+                             </div>
+                          </li>
+                       </ul>
+                    </div>
+                    <div class="postbox__comment-form">
+                       <h3 class="postbox__comment-form-title">Write a comment</h3>
+                       <form action="#">
+                          <div class="row">
+                             <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                <div class="postbox__comment-input">
+                                   <input type="text" placeholder="Your Name">
+                                </div>
+                             </div>
+                             <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                <div class="postbox__comment-input">
+                                   <input type="email" placeholder="Your Email">
+                                </div>
+                             </div>
+                             <div class="col-xxl-12">
+                                <div class="postbox__comment-input">
+                                   <input type="text" placeholder="Website">
+                                </div>
+                             </div>
+                             <div class="col-xxl-12">
+                                <div class="postbox__comment-input">
+                                   <textarea placeholder="Enter your comment ..."></textarea>
+                                </div>
+                             </div>
+                             <div class="col-xxl-12">
+                                <div class="postbox__comment-btn">
+                                   <button type="submit" class="tp-btn">Post Comment</button>
+                                </div>
+                             </div>
+                          </div>
+                       </form>
+                    </div>
+                 </div>
+              </div>
+              <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-12">
+                 <div class="sidebar__wrapper">
+                    <div class="sidebar__widget mb-55">
+                       <div class="sidebar__widget-content">
+                          <h3 class="sidebar__widget-title mb-25">Search</h3>
+                          <div class="sidebar__search">
+                             <form action="#">
+                                <div class="sidebar__search-input-2">
+                                   <input type="text" placeholder="Search Anything">
+                                   <button type="submit"><i class="far fa-search"></i></button>
+                                </div>
+                             </form>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="sidebar__widget mb-55">
+                       <h3 class="sidebar__widget-title mb-25">Recent Post</h3>
+                       <div class="sidebar__widget-content">
+                          <div class="sidebar__post rc__post">
+                             <div class="rc__post mb-20 d-flex align-items-center">
+                                <div class="rc__post-thumb">
+                                   <a href="blog-details.html"><img src="assets/img/blog/sidebar/blog-sm-1.jpg" alt="blog-sidebar"></a>
+                                </div>
+                                <div class="rc__post-content">
+                                   <h3 class="rc__post-title">
+                                      <a href="blog-details.html">Seamlessly monetize centa material bleeding.</a>
+                                   </h3>
+                                   <div class="rc__meta">
+                                      <span>21 Jan 2022</span>
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="rc__post mb-20 d-flex align-items-center">
+                                <div class="rc__post-thumb">
+                                   <a href="blog-details.html"><img src="assets/img/blog/sidebar/blog-sm-2.jpg" alt="blog-sidebar"></a>
+                                </div>
+                                <div class="rc__post-content">
+                                   <h3 class="rc__post-title">
+                                      <a href="blog-details.html">How often should you schedule professional</a>
+                                   </h3>
+                                   <div class="rc__meta">
+                                      <span>July 21, 2021</span>
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="rc__post mb-20 d-flex align-items-center">
+                                <div class="rc__post-thumb">
+                                   <a href="blog-details.html"><img src="assets/img/blog/sidebar/blog-sm-3.jpg" alt="blog-sidebar"></a>
+                                </div>
+                                <div class="rc__post-content">
+                                   <h3 class="rc__post-title">
+                                      <a href="blog-details.html">How to keep your institue and home Safe</a>
+                                   </h3>
+                                   <div class="rc__meta">
+                                      <span>July 21, 2021</span>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="sidebar__widget mb-40">
+                       <h3 class="sidebar__widget-title mb-10">Category</h3>
+                       <div class="sidebar__widget-content">
+                          <ul>
+                             <li><a href="blog.html">Business <span>(14)</span></a></li>
+                             <li><a href="blog.html">Cleaning <span>(19)</span></a></li>
+                             <li><a href="blog.html">Consultant <span>(21)</span></a></li>
+                             <li><a href="blog.html">Creative <span>(27)</span></a></li>
+                             <li><a href="blog.html">Technology <span>(35)</span></a></li>
+                          </ul>
+                       </div>
+                    </div>
+                    <div class="sidebar__widget mb-40">
+                       <h3 class="sidebar__widget-title mb-30">Tags</h3>
+                       <div class="sidebar__widget-content">
+                          <div class="tagcloud tagcloud-d">
+                             <a href="#">IT Solution</a>
+                             <a href="#">Digital Marketing</a>
+                             <a href="#">Software Training</a>
+                             <a href="#">Art &amp; Design</a>
+                             <a href="#">Photography</a>
+                             <a href="#">Music</a>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+</main>
+
+{% endblock content %}

@@ -4,8 +4,8 @@ from orders import views
 
 app_name = 'orders'
 urlpatterns = [
-    url(r'^payment$', views.payment, name='payment'),
-    path('', views.CourseList.as_view(), name='courselist'),
+    # url(r'^payment$', views.payment, name='payment'),
+    path('payment', views.payment, name='courselist'),
     path('place', views.CreateOrder.as_view(), name='place'),
     path('my-course', views.MyOrders.as_view(), name='my_course'),
     path('details/<int:pk>/', views.OrderDetails.as_view(), name='details'),
