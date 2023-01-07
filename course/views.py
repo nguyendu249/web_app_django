@@ -19,11 +19,6 @@ class CourseList(generic.ListView):
         context = super().get_context_data(**kwargs)
         return context
 
-# def CourseList(request):
-#     paginate_by = 20
-#     Courses = {'Courses' : Course.objects.all().order_by('created')}
-#     return render(request,'course_list.html', Courses)
-
 def CourseDetails(request, slug):
     status = 0
     course = Course.objects.get(slug = slug)

@@ -1,11 +1,6 @@
-from email.mime import image
-from msilib import type_short
-from statistics import mode
-from tkinter.tix import Tree
-from unicodedata import name
+
 from django.db import models
 from django.urls import reverse
-from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from autoslug import AutoSlugField
 

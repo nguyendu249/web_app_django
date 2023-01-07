@@ -54,7 +54,9 @@ INSTALLED_APPS = [
     'orders',
     'home',
     'course',
-    'blog'
+    'blog',
+    'vnpay',
+    
 ]
 
 #cấu hình chỉ định trang đăng nhập và đăng kí
@@ -176,7 +178,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-VNPAY_RETURN_URL = 'http://localhost:8000/payment_return'  # get from config
+VNPAY_RETURN_URL = 'http://localhost:8000/thanh-toan/payment-details'  # get from config
 VNPAY_PAYMENT_URL = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'  # get from config
 VNPAY_API_URL = 'https://sandbox.vnpayment.vn/merchant_webapi/merchant.html'
 VNPAY_TMN_CODE = 'VDQV3CN6'  # Website ID in VNPAY System, get from config
