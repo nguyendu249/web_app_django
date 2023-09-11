@@ -6,7 +6,8 @@ def index(request):
     return render(request,'blog_list.html', {'all_blog' : all_blog})
 
 def Blogdetails(request, slug):
-    blog = Blog.objects.get( slug=slug )
+    blog = Blog.objects.get( slug = slug )
+    # select * from bog where slug = slug
     return render(request,'blog_details.html',{'blog' : blog})
 
 

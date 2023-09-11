@@ -1,9 +1,6 @@
 {% extends 'header.html'%}
 {% block title%} {{blog.title}} {% endblock title%}
 {% block content %}
-{% load static %}
-{% load humanize %}
-
 <main>
     <div class="postbox__area pb-40">
         <div class="container">
@@ -18,7 +15,7 @@
                        </div>
                        <div class="postbox__content">
                           <div class="postbox__meta">
-                             <span><i class="fi fi-rr-calendar"></i> {{blog.created}} </span>
+                             <span><i class="fi fi-rr-calendar"></i> {{ blog.created }} </span>
                              <span><a href="#"><i class="fi fi-rr-user"></i>admin</a></span>
                           </div>
                           <h3 class="postbox__title">
@@ -35,68 +32,6 @@
                           </div>
                        </div>
                     </article>
-                    <div class="postbox__comment mb-65">
-                       <h3 class="postbox__comment-title">3 Comments</h3>
-                       <ul>
-                          <li>
-                             <div class="postbox__comment-box grey-bg">
-                                <div class="postbox__comment-info d-flex">
-                                      <div class="postbox__comment-avater mr-20">
-                                         <img src="assets/img/blog/comments/comment-1.jpg" alt="">
-                                      </div>
-                                      <div class="postbox__comment-name">
-                                         <h5>Eleanor Fant</h5>
-                                         <span class="post-meta"> July 14, 2022</span>
-                                      </div>
-                                </div>
-                                <div class="postbox__comment-text ml-65">
-                                   <p>So I said lurgy dropped a clanger Jeffrey bugger cuppa gosh David blatant have it, standard A bit of how's your father my lady absolutely.</p>
-                                   <div class="postbox__comment-reply">
-                                      <a href="#">Reply</a>
-                                   </div>
-                                </div>
-                             </div>
-                          </li>
-                          <li class="children">
-                             <div class="postbox__comment-box grey-bg">
-                                <div class="postbox__comment-info d-flex">
-                                      <div class="postbox__comment-avater mr-20">
-                                         <img src="assets/img/blog/comments/comment-2.jpg" alt="">
-                                      </div>
-                                      <div class="postbox__comment-name">
-                                         <h5>Eleanor Fant</h5>
-                                         <span class="post-meta"> July 14, 2022</span>
-                                      </div>
-                                </div>
-                                <div class="postbox__comment-text ml-65">
-                                   <p>So I said lurgy dropped a clanger Jeffrey bugger cuppa gosh David blatant have it, standard A bit of how's your father my lady absolutely.</p>
-                                   <div class="postbox__comment-reply">
-                                      <a href="#">Reply</a>
-                                   </div>
-                                </div>
-                             </div>
-                          </li>
-                          <li>
-                             <div class="postbox__comment-box grey-bg">
-                                <div class="postbox__comment-info d-flex">
-                                      <div class="postbox__comment-avater mr-20">
-                                         <img src="assets/img/blog/comments/comment-3.jpg" alt="">
-                                      </div>
-                                      <div class="postbox__comment-name">
-                                         <h5>Eleanor Fant</h5>
-                                         <span class="post-meta"> July 14, 2022</span>
-                                      </div>
-                                </div>
-                                <div class="postbox__comment-text ml-65">
-                                   <p>So I said lurgy dropped a clanger Jeffrey bugger cuppa gosh David blatant have it, standard A bit of how's your father my lady absolutely.</p>
-                                   <div class="postbox__comment-reply">
-                                      <a href="#">Reply</a>
-                                   </div>
-                                </div>
-                             </div>
-                          </li>
-                       </ul>
-                    </div>
                     <div class="postbox__comment-form">
                        <h3 class="postbox__comment-form-title">Write a comment</h3>
                        <form action="#">
@@ -143,52 +78,6 @@
                                    <button type="submit"><i class="far fa-search"></i></button>
                                 </div>
                              </form>
-                          </div>
-                       </div>
-                    </div>
-                    <div class="sidebar__widget mb-55">
-                       <h3 class="sidebar__widget-title mb-25">Recent Post</h3>
-                       <div class="sidebar__widget-content">
-                          <div class="sidebar__post rc__post">
-                             <div class="rc__post mb-20 d-flex align-items-center">
-                                <div class="rc__post-thumb">
-                                   <a href="blog-details.html"><img src="assets/img/blog/sidebar/blog-sm-1.jpg" alt="blog-sidebar"></a>
-                                </div>
-                                <div class="rc__post-content">
-                                   <h3 class="rc__post-title">
-                                      <a href="blog-details.html">Seamlessly monetize centa material bleeding.</a>
-                                   </h3>
-                                   <div class="rc__meta">
-                                      <span>21 Jan 2022</span>
-                                   </div>
-                                </div>
-                             </div>
-                             <div class="rc__post mb-20 d-flex align-items-center">
-                                <div class="rc__post-thumb">
-                                   <a href="blog-details.html"><img src="assets/img/blog/sidebar/blog-sm-2.jpg" alt="blog-sidebar"></a>
-                                </div>
-                                <div class="rc__post-content">
-                                   <h3 class="rc__post-title">
-                                      <a href="blog-details.html">How often should you schedule professional</a>
-                                   </h3>
-                                   <div class="rc__meta">
-                                      <span>July 21, 2021</span>
-                                   </div>
-                                </div>
-                             </div>
-                             <div class="rc__post mb-20 d-flex align-items-center">
-                                <div class="rc__post-thumb">
-                                   <a href="blog-details.html"><img src="assets/img/blog/sidebar/blog-sm-3.jpg" alt="blog-sidebar"></a>
-                                </div>
-                                <div class="rc__post-content">
-                                   <h3 class="rc__post-title">
-                                      <a href="blog-details.html">How to keep your institue and home Safe</a>
-                                   </h3>
-                                   <div class="rc__meta">
-                                      <span>July 21, 2021</span>
-                                   </div>
-                                </div>
-                             </div>
                           </div>
                        </div>
                     </div>
