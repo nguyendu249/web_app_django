@@ -1,7 +1,8 @@
 # Django e-commerce
 
-Run project with Virtual Enviroments 
+Run project with Virtual Enviroments
 
+- python -m venv venv
 - run : venv\Scripts\activate
 - start project : python manage.py runserver
 - and run cmd in this cmd console only to stay in Virtual Enviroments 

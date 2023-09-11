@@ -4,6 +4,8 @@ from course.models import Course, Lesson, Topic
 from orders.models import OrderItem
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
+from django.db.models import Count
+
 # Create your views here.
 class CourseList(generic.ListView):
     model = Course
@@ -21,12 +23,18 @@ class CourseList(generic.ListView):
 
 def CourseDetails(request, slug):
     status = 0
-    course = Course.objects.get(slug = slug)
-    order_item = OrderItem.objects.filter(user = request.user)
+    course = Course.objects.get(slug=slug)
+    order_item = OrderItem.objects.filter(user=request.user)
+    
     for item in order_item:
         if course.id == item.course_id:
             status = 1
-    return render(request,'course_details.html', {'course' : course, 'status' : status})
+
+    # Lấy tổng số bài học (lessons) và tổng số chủ đề (topics)
+    total_lessons = Lesson.objects.filter(topic__course=course).count()
+    total_topics = Topic.objects.filter(course=course).count()
+
+    return render(request, 'course_details.html', {'course': course, 'status': status, 'total_lessons': total_lessons, 'total_topics': total_topics})
 
 @login_required
 def LearnCourse(request, slug):

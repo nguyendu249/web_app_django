@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'easy_thumbnails',
     'django_filters',
-    'debug_toolbar',
     'accounts',
     'cart',
     'orders',
@@ -88,7 +87,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 INTERNAL_IPS = [

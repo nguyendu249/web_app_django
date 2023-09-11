@@ -29,7 +29,6 @@ urlpatterns = [
     path('tin-tuc/',include('blog.urls', namespace='blog')),
     path('thanh-toan/',include('vnpay.urls', namespace='vnpay')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 if settings.DEBUG:
